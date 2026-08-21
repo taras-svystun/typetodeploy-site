@@ -11,6 +11,14 @@
 
 **Audience:** French academic + entrepreneurial jury. Pedagogical mission, not a VC. They evaluate the founder, the coherence of the project, the quality of the validation reasoning — not vanity metrics.
 
+**Team (real, do not embellish):**
+- **Lisa** — porteuse de projet. Coach and instructor (couples coaching, mountain guiding, snowboard, trail running, teen mentoring). She owns and runs the business whose website triggered the whole project. She is the primary French speaker and will present to the jury.
+- **Taras** — associé technique. Four years of experience in software development and machine learning. Builds and operates the system.
+
+**The origin story is the strongest asset and it is true:** Lisa had a professional website she could not update herself. Every change required Taras. TypeToDeploy was built to remove that dependency, and Lisa is its first and current user, on a real production site.
+
+**Oral-defence constraint (drives the copy):** Lisa must be able to explain every sentence on this website out loud, in French, without a developer next to her. If a section cannot be defended by a non-developer, it is written wrong. Prefer plain French over technical vocabulary everywhere, including in the technical section.
+
 **Hard rules:**
 - French is the primary language. English is a secondary mirror.
 - Never invent metrics, users, revenue, partnerships, traction, or capabilities.
@@ -25,7 +33,9 @@
 
 | Decision | Value | Reason |
 |---|---|---|
-| Repository | **New, separate repo** (e.g. `typetodeploy-site`) | The product's bot commits to `taras-and-lisa`. Isolation prevents the demo site from being broken by the product. |
+| Repository | **New, separate public repo:** `taras-svystun/typetodeploy-site` | The bot commits to `taras-svystun/taras-and-lisa`. Isolation prevents the presentation site from being broken by the product. Public, because verifiability is the point. |
+| Domain | `typetodeploy.taras-and-lisa.com` (subdomain of the existing Cloudflare zone) | Free, contains the product name, HTTPS handled automatically. |
+| Existing Workers (do not touch) | `typetodeploy-bot`, `taras-and-lisa` | These are production. The new site is a third, independent Worker. |
 | Framework | Astro 5, `output: 'static'` | Already known stack, zero client JS by default, fastest path. |
 | Styling | Plain CSS with custom properties in one `global.css` | 2 pages. No UI framework needed. Fewer deps = fewer failure modes. |
 | Client JS | None, except `<video>` native attributes | Language switch is a plain `<a>` link. |
@@ -138,7 +148,7 @@ Four pages. Nothing else. No blog, no legal page (add `/mentions-legales` only i
 | 7 | Ce qui reste à valider | Founder maturity — **the section that wins** | Q4 |
 | 8 | Phase 2 — feuille de route | Where it goes | Q6 |
 | 9 | Impact visé | Why it's useful | Q5 |
-| 10 | Porteur du projet | Who is behind it | — |
+| 10 | L'équipe | Who is behind it, and why them specifically | — |
 | 11 | Ce que l'accompagnement apporterait | Direct answer to the jury | Q7 |
 | 12 | Contact / liens | What to do next | Q8 |
 
@@ -176,6 +186,20 @@ et le site cesse de remplir sa fonction.
 ```
 
 Three short stat-free blocks. Do **not** add invented percentages.
+
+**Immediately after, a bordered inset block (`--accent-soft` background), H3:**
+`Ce projet vient d'un problème que nous avions`
+
+```
+Lisa est coach et formatrice. Son site présente son activité, ses prestations et
+ses tarifs. Elle ne pouvait pas le modifier elle-même : chaque changement passait
+par Taras.
+
+Nous avons construit l'outil qui manquait. Lisa est aujourd'hui la première
+utilisatrice de TypeToDeploy, sur un site réellement en ligne.
+```
+
+This block is the emotional and evidential anchor of the page. Keep it short. Do not dramatise it.
 
 ### 5.3 La solution
 
@@ -252,7 +276,12 @@ Optional visual: a small monospace block showing a rejected diff. Two lines max.
 | Hypothèse | Méthode prévue | Critère de réussite |
 |---|---|---|
 | `Une personne non technique met effectivement son site à jour plus souvent lorsque la barrière disparaît.` | `Suivi de la fréquence de mise à jour sur 8 semaines, auprès d'un premier groupe d'utilisateurs pilotes.` | `Une augmentation nette et mesurable par rapport à la période précédente.` |
-| `Le premier client n'est pas le propriétaire du site, mais l'agence ou le développeur indépendant qui le maintient pour lui.` | `Entretiens qualitatifs avec des agences web et des développeurs indépendants.` | `Une majorité identifie les petites modifications client comme une charge non rentable.` |
+| `Le premier client est le propriétaire du site : indépendant, petite structure ou association.` | `Entretiens qualitatifs auprès de propriétaires de sites professionnels.` | `Une majorité déclare renoncer régulièrement à une mise à jour à cause de la démarche à engager.` |
+| `Ou bien le premier client est l'agence ou le développeur indépendant qui maintient ces sites.` | `Entretiens qualitatifs auprès d'agences web et de développeurs indépendants.` | `Une majorité identifie les petites modifications client comme une charge fréquente et peu rentable.` |
+**Note rendered under the table, in `--ink-muted`:**
+`Les deux hypothèses de segment sont présentées ensemble volontairement. Nous ne savons pas encore laquelle est la bonne, et les entretiens servent précisément à trancher.`
+
+> Admitting an open question in writing is a deliberate credibility choice for this jury. Do not soften it.
 | `Le contrôle de périmètre est suffisant pour permettre une utilisation sans supervision technique.` | `Campagne de tests adverses : demandes ambiguës, contradictoires ou hors périmètre.` | `Aucune modification hors périmètre enregistrée.` |
 | `Il existe un prix acceptable pour ce service.` | `Test de prix auprès des personnes interrogées.` | `À définir à l'issue des entretiens.` |
 
@@ -288,19 +317,52 @@ L'objectif n'est pas de remplacer un outil de gestion de contenu, mais de rendre
 modifiable un site qui, aujourd'hui, ne l'est pas.
 ```
 
-### 5.10 Porteur du projet
+### 5.10 L'équipe
 
-**H2:** `Porteur du projet`
-Short paragraph: name, current study/apprenticeship situation, what he builds, why he is credible on this specific problem (he built the thing; the first user is a real non-technical person with a real site). Photo optional — if used, one small square photo, no filters.
+**H2:** `L'équipe`
+**Lead:** `Deux personnes, deux rôles distincts, et un projet né d'un besoin que nous avions nous-mêmes.`
+
+Two cards side by side (stacked on mobile). 1px border, no photo required; if photos are used, one small square each, no filter, same crop.
+
+**Carte 1 — Lisa**
+- Rôle : `Porteuse du projet`
+- Texte :
+```
+Coach et formatrice. Elle conçoit et anime des accompagnements en communication,
+en encadrement de groupes et en pratiques de plein air.
+
+C'est son site professionnel qui est à l'origine du projet, et c'est elle qui
+utilise l'outil au quotidien. Elle porte la relation utilisateur, les entretiens
+de validation et le développement de l'activité.
+```
+
+**Carte 2 — Taras**
+- Rôle : `Associé technique`
+- Texte :
+```
+Quatre ans d'expérience en développement logiciel et en apprentissage automatique.
+
+Il a conçu et développé l'ensemble du système : l'agent, le contrôle de périmètre,
+l'intégration au dépôt de code et la mise en production.
+```
+
+**Closing line under the two cards, `--ink-muted`:**
+`L'utilisatrice de l'outil et sa conceptrice sont dans la même équipe. Chaque limite rencontrée à l'usage revient directement dans le développement.`
+
+> That last line is the point of the section. It is a real structural advantage and it costs nothing to claim, because it is verifiable.
 
 ### 5.11 Ce que l'accompagnement apporterait
 
 **H2:** `Ce que l'accompagnement du PeeL apporterait`
 
-- `Un accès à des utilisateurs test — indépendants, petites structures, associations — pour vérifier les hypothèses ci-dessus dans des conditions réelles.`
-- `Un regard extérieur sur le segment à viser et sur le modèle économique, qui restent aujourd'hui la principale zone d'incertitude.`
-- `Un cadre de travail et un rythme de suivi, en parallèle de l'alternance.`
-- `Un financement permettant de couvrir l'hébergement, les coûts d'appel au modèle et le temps consacré à la phase pilote.`
+**Lead:** `Le prototype est construit et fonctionne. Ce qui nous manque n'est pas technique.`
+
+- `Un accès à des utilisateurs test — indépendants, petites structures, associations — pour vérifier nos hypothèses dans des conditions réelles plutôt qu'en interne.`
+- `Un regard extérieur pour trancher entre nos deux hypothèses de segment, et pour construire un modèle économique. C'est aujourd'hui notre principale zone d'incertitude.`
+- `Un cadre de travail et un rythme de suivi régulier, en parallèle de nos activités.`
+- `Un financement couvrant l'hébergement, les coûts d'appel au modèle et le temps consacré à la phase pilote.`
+
+> Do not mention any employer, apprenticeship, or company name anywhere on the site. None is confirmed.
 
 ### 5.12 Contact
 
@@ -322,7 +384,8 @@ Same structure. Keep it slightly shorter than the French. Key strings:
 - **Validation H2:** `What still needs to be validated`
 - **Phase 2 H2:** `Phase 2 — from content editing to site editing`
 - **Impact H2:** `Who this is for`
-- **Founder H2:** `About the founder`
+- **Team H2:** `The team` — Lisa, project lead and first user; Taras, technical co-founder, four years in software development and machine learning.
+- **Origin block H3:** `This project came from a problem we had`
 - **Support H2:** `What the PeeL programme would bring`
 
 ---
@@ -370,6 +433,63 @@ public/favicon.svg
 ```
 
 Screenshot naming: `01-commande-tarif.png`, `02-site-avant.png`, `03-site-apres.png`, etc. Order = display order.
+
+### 8.1 Confirmed URLs (use these, do not invent alternatives)
+
+| Purpose | URL |
+|---|---|
+| Live site edited by the agent | `https://taras-and-lisa.com` |
+| Product repository (public) | `https://github.com/taras-svystun/taras-and-lisa` |
+| Presentation site repository (public) | `https://github.com/taras-svystun/typetodeploy-site` |
+| Production domain of this site | `https://typetodeploy.taras-and-lisa.com` |
+| Example bot commit | founder will supply — must be a commit made **after** the scope guardrail was deployed |
+
+> The commit `70cd1ba…` is a *pre-guardrail* commit that demonstrates the scope-violation bug. It may be used deliberately in the "limits / what we learned" context, but **never** as the headline proof-of-work commit.
+
+---
+
+## 13. PDF one-pager (jury handout)
+
+Juries print things and pass them around. One A4 page, produced from the same design.
+
+**Structure (single page, French only):**
+
+1. Header strip: `TypeToDeploy` + one line: `Mettre à jour son site web en envoyant un message.` + the site URL.
+2. Left column (60%):
+   - `Le problème` — 3 lines
+   - `La solution` — the 4 steps, one line each
+   - `Ce qui est construit` — 5 bullets, with status
+3. Right column (40%):
+   - One screenshot of the Telegram conversation
+   - `Ce qui reste à valider` — 3 lines
+   - `Phase 2` — 3 lines
+4. Footer strip: the two names and roles, contact email, QR code pointing to `https://typetodeploy.taras-and-lisa.com`.
+
+**Production:** build it in Claude Design from the same tokens, then `Export → PDF`. Do not build a PDF pipeline in code.
+**Constraint:** must be legible printed in black and white. Do not rely on the accent colour to carry meaning; badges need a border or a label, not just a fill.
+
+---
+
+## 14. Oral defence preparation (not part of the website, but drives the copy)
+
+Lisa presents. She must be able to answer these in French without a developer present. Every answer below must match what the website says, word for word where possible.
+
+| Question the jury will ask | The answer the site must support |
+|---|---|
+| `Concrètement, ça fait quoi ?` | `On écrit un message, le site se met à jour tout seul quelques instants après.` |
+| `En quoi c'est différent de WordPress ou Wix ?` | `Ces outils supposent qu'on ait construit le site avec eux. Nous, on se branche sur un site déjà existant, construit comme du code, et qui n'a aucune interface de modification.` |
+| `Et si l'intelligence artificielle se trompe ?` | `C'est le point sur lequel on a le plus travaillé. Avant d'enregistrer quoi que ce soit, le système compare ce que l'agent a annoncé vouloir modifier et ce qu'il a réellement modifié. Si ça ne correspond pas, rien n'est enregistré. Ce n'est pas une consigne donnée au modèle, c'est un contrôle dans le code, que le modèle ne peut pas contourner.` |
+| `Combien d'utilisateurs avez-vous ?` | `Une. Moi. Sur un site réellement en ligne. C'est justement pour élargir ça qu'on candidate.` |
+| `Qui va payer, et combien ?` | `On ne le sait pas encore. On a deux hypothèses de segment et une méthode pour trancher. C'est écrit sur le site.` |
+| `Qu'est-ce que vous avez appris jusqu'ici ?` | `Qu'on ne peut pas faire confiance à une consigne écrite pour contraindre un modèle. Il faut un contrôle dans le code. On l'a découvert en le testant, et le test qui a échoué est public.` |
+
+> The last row is the strongest answer in the whole set. It shows an experiment, a negative result, and a correction. That is exactly what a pedagogical jury is grading.
+
+---
+
+## 15. Eligibility check (do before anything else)
+
+The Statut National Étudiant-Entrepreneur and the PeeL programmes are open to students and recent graduates holding the baccalauréat or an equivalent, attached to an établissement in the network. **Verify that Lisa is eligible under her current status before investing further work.** If she is not, the applicant of record must change, and the whole "porteuse de projet" framing on the site changes with it. Contact `peel@univ-lorraine.fr` to confirm rather than assuming.
 
 ---
 
@@ -722,3 +842,6 @@ STOP.
 - [ ] Deployed, HTTPS active, custom domain resolving
 - [ ] Tested on a real phone and a real laptop
 - [ ] Someone who has never heard of the project understands it in 60 seconds
+- [ ] Lisa can read every sentence on the site aloud in French and explain it unprompted
+- [ ] The PDF one-pager exports cleanly and is legible printed in black and white
+- [ ] Eligibility confirmed with the PeeL office
