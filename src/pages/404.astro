@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const lang = 'fr';
+---
+
+<Layout lang={lang} title="Page introuvable — TypeToDeploy" description="Cette page n'existe pas. Retournez à l'accueil de TypeToDeploy." path="/404">
+	<section class="not-found">
+		<div class="container">
+			<p class="eyebrow">404</p>
+			<h1>Page introuvable</h1>
+			<p class="lead">Cette page n'existe pas ou a été déplacée.</p>
+			<a href="/" class="cta-primary">Retour à l'accueil</a>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.container {
+		max-width: var(--width-page);
+		margin: 0 auto;
+		padding: 0 var(--s-6);
+	}
+
+	.not-found {
+		padding: 120px 0;
+		text-align: center;
+	}
+
+	.eyebrow {
+		font-size: var(--step--1);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: var(--ink-muted);
+	}
+
+	h1 {
+		font-size: var(--step-3);
+		line-height: 1.2;
+		margin-top: var(--s-4);
+	}
+
+	.lead {
+		font-size: var(--step-1);
+		color: var(--ink-muted);
+		margin: var(--s-4) auto 0;
+		max-width: var(--width-text);
+	}
+
+	.cta-primary {
+		display: inline-block;
+		background: var(--accent);
+		color: var(--surface);
+		font-size: 15px;
+		font-weight: 500;
+		padding: 13px 22px;
+		border-radius: var(--radius);
+		text-decoration: none;
+		margin-top: var(--s-8);
+	}
+
+	.cta-primary:hover {
+		background: var(--accent-hover);
+	}
+
+	@media (max-width: 700px) {
+		.container {
+			padding: 0 20px;
+		}
+
+		.not-found {
+			padding: 80px 0;
+		}
+
+		h1 {
+			font-size: var(--step-2);
+		}
+
+		.lead {
+			font-size: var(--step-0);
+		}
+
+		.cta-primary {
+			display: block;
+			text-align: center;
+		}
+	}
+</style>

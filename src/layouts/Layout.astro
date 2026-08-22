@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/source-serif-4';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+	title: string;
+	description: string;
+	path: string;
+}
+
+const { lang, title, description, path } = Astro.props;
+const t = useTranslations(lang);
+
+const canonicalUrl = new URL(path, Astro.site);
+const frUrl = new URL(path === '/en/' ? '/' : path === '/en/demo' ? '/demonstration' : path, Astro.site);
+const enUrl = new URL(path === '/' ? '/en/' : path === '/demonstration' ? '/en/demo' : path, Astro.site);
+const ogImageUrl = new URL('/og-image.png', Astro.site);
+const ogLocale = lang === 'fr' ? 'fr_FR' : 'en_US';
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="alternate" hreflang="fr" href={frUrl} />
+		<link rel="alternate" hreflang="en" href={enUrl} />
+		<link rel="alternate" hreflang="x-default" href={frUrl} />
+
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={ogLocale} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	</head>
+	<body>
+		<a href="#main" class="skip-link">{t.skipLink}</a>
+		<Header lang={lang} path={path} />
+		<main id="main" tabindex="-1">
+			<slot />
+		</main>
+		<Footer lang={lang} path={path} />
+	</body>
+</html>
+
+<style>
+	.skip-link {
+		position: absolute;
+		top: -100%;
+		left: var(--s-4);
+		z-index: 100;
+		background: var(--accent);
+		color: var(--surface);
+		padding: var(--s-3) var(--s-4);
+		border-radius: var(--radius);
+		font-size: var(--step--1);
+		text-decoration: none;
+	}
+
+	.skip-link:focus {
+		top: var(--s-4);
+	}
+</style>

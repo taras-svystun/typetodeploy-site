@@ -1,0 +1,114 @@
+---
+import { getAlternateUrl, useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+	path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = useTranslations(lang);
+
+const altLang: Lang = lang === 'fr' ? 'en' : 'fr';
+const altHref = getAlternateUrl(path, lang);
+const altLabel = altLang === 'en' ? 'Switch to English' : 'Passer en français';
+---
+
+<footer>
+	<div class="bar">
+		<div class="links">
+			<span class="copyright">© 2026 TypeToDeploy</span>
+			<a href="mailto:contact@taras-and-lisa.com">contact@taras-and-lisa.com</a>
+			<a href="https://github.com/taras-svystun/typetodeploy-site" target="_blank" rel="noopener">GitHub</a>
+			<a href="https://taras-and-lisa.com" target="_blank" rel="noopener">{t.footer.liveSite}</a>
+		</div>
+		<div class="lang">
+			<span>{lang.toUpperCase()}</span>
+			<span class="sep" aria-hidden="true">/</span>
+			<a href={altHref} hreflang={altLang} lang={altLang} aria-label={altLabel}>{altLang.toUpperCase()}</a>
+		</div>
+	</div>
+</footer>
+
+<style>
+	footer {
+		background: var(--surface);
+		border-top: 1px solid var(--border);
+		padding: var(--s-12) 0;
+	}
+
+	.bar {
+		max-width: var(--width-page);
+		margin: 0 auto;
+		padding: 0 var(--s-6);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--s-8);
+	}
+
+	.links {
+		display: flex;
+		align-items: center;
+		gap: var(--s-6);
+		font-size: var(--step--1);
+		color: var(--ink-muted);
+	}
+
+	.links a {
+		font-size: var(--step--1);
+	}
+
+	.lang {
+		display: flex;
+		align-items: center;
+		gap: var(--s-3);
+		font-size: var(--step--1);
+	}
+
+	.lang .sep {
+		color: var(--border-strong);
+	}
+
+	@media (max-width: 700px) {
+		footer {
+			padding: 28px 0 36px;
+		}
+
+		.bar {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 4px;
+			padding: 0 20px;
+		}
+
+		.links {
+			display: contents;
+		}
+
+		.links a {
+			display: block;
+			font-size: var(--step--0-5);
+			padding: 13px 0;
+		}
+
+		.links .copyright {
+			order: 1;
+			font-size: var(--step--1);
+			color: var(--ink-muted);
+			margin-top: var(--s-3);
+		}
+
+		.lang {
+			padding: 10px 0;
+			font-size: var(--step--0-5);
+		}
+
+		.lang a {
+			display: inline-block;
+			padding: 13px 14px;
+			margin: -13px -14px;
+			font-size: var(--step--0-5);
+		}
+	}
+</style>

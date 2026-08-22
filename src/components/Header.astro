@@ -1,0 +1,145 @@
+---
+import { getAlternateUrl, useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+	path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = useTranslations(lang);
+
+const homeHref = lang === 'fr' ? '/' : '/en/';
+const demoHref = lang === 'fr' ? '/demonstration' : '/en/demo';
+const isDemo = path === '/demonstration' || path === '/en/demo';
+const altLang: Lang = lang === 'fr' ? 'en' : 'fr';
+const altHref = getAlternateUrl(path, lang);
+const altLabel = altLang === 'en' ? 'Switch to English' : 'Passer en français';
+---
+
+<header>
+	<div class="bar">
+		<a href={homeHref} class="brand">TypeToDeploy</a>
+		<nav>
+			{
+				isDemo ? (
+					<span class="nav-item nav-current" aria-current="page">
+						{t.nav.demo}
+					</span>
+				) : (
+					<a href={demoHref} class="nav-item">
+						{t.nav.demo}
+					</a>
+				)
+			}
+			<div class="lang-group">
+				<span class="lang-badge">{lang.toUpperCase()}</span>
+				<a class="lang-link" href={altHref} hreflang={altLang} lang={altLang} aria-label={altLabel}>
+					{altLang.toUpperCase()}
+				</a>
+			</div>
+		</nav>
+	</div>
+</header>
+
+<style>
+	header {
+		border-bottom: 1px solid var(--border);
+		background: var(--surface);
+	}
+
+	.bar {
+		max-width: var(--width-page);
+		margin: 0 auto;
+		padding: 0 var(--s-6);
+		height: 68px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.brand {
+		font-size: 15px;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		gap: var(--s-6);
+	}
+
+	.nav-item {
+		font-size: 15px;
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	.nav-current {
+		font-weight: 500;
+	}
+
+	.lang-group {
+		display: flex;
+		align-items: center;
+		gap: var(--s-2);
+		padding-left: var(--s-6);
+		border-left: 1px solid var(--border);
+	}
+
+	.lang-badge {
+		font-size: var(--step--1);
+		font-weight: 500;
+		color: var(--ink);
+		padding: 4px 8px;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+	}
+
+	.lang-link {
+		font-size: var(--step--1);
+		color: var(--ink-muted);
+		padding: 4px 8px;
+		text-decoration: none;
+	}
+
+	@media (max-width: 700px) {
+		.bar {
+			padding: 0 20px;
+			height: 60px;
+		}
+
+		.brand {
+			display: inline-block;
+			padding: 14px 0;
+		}
+
+		nav {
+			gap: 6px;
+		}
+
+		.nav-item {
+			font-size: 14px;
+			padding: 14px 8px;
+		}
+
+		.lang-group {
+			padding-left: 0;
+			border-left: none;
+			gap: 0;
+		}
+
+		.lang-badge {
+			display: none;
+		}
+
+		.lang-link {
+			font-size: var(--step--1);
+			padding: 14px 14px;
+			border-left: 1px solid var(--border);
+		}
+	}
+</style>

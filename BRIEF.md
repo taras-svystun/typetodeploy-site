@@ -112,25 +112,39 @@ Borrow from institutional design only the *habits*: strong information hierarchy
   --font-mono:    ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Scale (rem) */
+  --step--2: 0.8125rem; /* 13px — found in the built design (row micro-labels), not in the original scale */
   --step--1: 0.875rem;
+  --step--0-5: 0.9375rem; /* 15px — found in the built design (evidence-strip labels, screenshot captions); the single most-used size after --step-0 and --step--1 */
   --step-0:  1rem;
+  --step-0-5: 1.0625rem; /* 17px — found in the built design (card sub-headings, e.g. team member names) */
   --step-1:  1.1875rem;
   --step-2:  1.5rem;
   --step-3:  2rem;
-  --step-4:  2.75rem;
+  --step-3-5: 2.125rem; /* 34px — found in the built design, mobile H1 only */
+  --step-4:  2.75rem;   /* declared, but not used anywhere in the built design */
   --step-5:  3.5rem;   /* H1 desktop */
 
   /* Space (4px base) */
   --s-1: 0.25rem; --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
   --s-6: 1.5rem;  --s-8: 2rem;    --s-12: 3rem;   --s-16: 4rem;
+  --s-18: 4.5rem; /* 72px — found in the built design: the section-6–12 desktop padding described in §2.3, missing from the original scale */
   --s-24: 6rem;   --s-32: 8rem;
 
   /* Layout */
   --width-page: 1120px;
   --width-text: 68ch;
   --radius: 6px;
+  --radius-sm: 4px; /* found in the built design: nested screenshot images inside a 6px-radius frame */
 }
 ```
+
+> **Confirmed 2026-08-22 — scale corrected to match the built design.** Phase 0 inventory found the
+> ten design files consistently using several sizes absent from the original scale above
+> (`0.8125rem`, `0.9375rem`, `1.0625rem`, `2.125rem`, a `72px` section-padding step, and a `4px`
+> radius variant). Per §2.4 rule 1, the design wins — the scale above now includes them under
+> `--step--2` / `--step--0-5` / `--step-0-5` / `--step-3-5` / `--s-18` / `--radius-sm`. `--step-4`
+> (2.75rem) remains declared per the original spec but, like `--ink-faint`, is confirmed unused in
+> the built design.
 
 ### 2.3 Rules
 
@@ -334,6 +348,19 @@ Optional visual: a small monospace block showing a rejected diff. Two lines max.
 **Lead:** `Le prototype fonctionne. La demande, elle, n'est pas encore démontrée. Voici les hypothèses que nous cherchons à vérifier et la méthode prévue.`
 
 > Voice fix: the rest of the site speaks as `nous`. This lead used to say `je`. Keep `nous` everywhere.
+>
+> **Fixed 2026-08-22:** the design files (`Homepage FR.dc.html` line 221 and `Homepage FR -
+> Mobile.dc.html` line 209) read *"Voici les hypothèses que **je cherche** à vérifier..."* —
+> confirmed as a design-file error under §2.4 rule 3. The founder gave explicit one-time
+> permission to correct it directly in `website_design/` (an exception to the normal "never edit"
+> rule), and both files now read **"Voici les hypothèses que nous cherchons à vérifier et la
+> méthode prévue."** Phase 3 can extract this lead verbatim — no further correction needed.
+>
+> **Fixed 2026-08-22 (EN):** the same voice bug existed in the English mirror (`Homepage
+> EN.dc.html` line 221 and `Homepage EN - Mobile.dc.html` line 209): *"These are the hypotheses
+> **I want** to test, and how."* Same §2.4 rule 3 case, same one-time founder permission, minimal
+> pronoun-only edit (no other wording touched) — both files now read **"These are the hypotheses
+> we want to test, and how."** Phase 3 can extract this lead verbatim.
 
 | Hypothèse | Méthode prévue | Critère de réussite |
 |---|---|---|
@@ -468,6 +495,13 @@ Same structure. Keep it slightly shorter than the French. Key strings:
    Under it, one line: `Enregistrement réel, sans montage du résultat : la conversation à gauche, le site à droite. La vidéo est accélérée : en conditions réelles, la mise à jour est publiée en une minute environ.`
    The speed-up must be stated. An unlabelled fast video reads as a fake.
    `prefers-reduced-motion: reduce` → remove `autoplay`, show poster + controls.
+
+   **Confirmed 2026-08-22:** the video must behave like a GIF — silent, autoplaying, looping —
+   exactly as the `muted loop playsinline autoplay` attributes above specify. Phase 0 inventory
+   found the design files' `<video>` tags missing all four of those attributes (`controls` and
+   `preload="metadata"` only). Since `website_design/` is not edited for behavioural attributes
+   like this, Phase 4 must add `muted loop playsinline autoplay` to the video tag itself — this
+   BRIEF wins on behaviour per §2.4 rule 2, the design file's omission was an error, not a decision.
 3. **Verification block** — a bordered box, `--accent-soft` background:
    `Cette modification a produit un commit réel dans le dépôt du site.`
    → link to the actual commit URL on GitHub
@@ -517,7 +551,8 @@ Screenshots, as used in the design files (same session as the video):
 | `site_before_v2`, `site_after_v2` | desktop demo | the live page before / after the change |
 | `site_before_mobile_v2`, `site_after_mobile_v2` | mobile demo | the same two, cropped to the hero text column |
 | `bot_3_onepager` | one-pager | `bot_3_phone` cropped to the request + commit |
-| `qr-typetodeploy` | one-pager | QR to the production domain |
+| `qr-typetodeploy` | one-pager (FR) | QR to the production domain |
+| `qr-typetodeploy-en` | one-pager (EN) | Same QR, for the EN one-pager — found in `website_design/images/` during Phase 0 inventory but not previously listed here |
 
 Order = display order. The phone captures are not a nicety: they are the only legible option at 375px.
 
@@ -529,9 +564,12 @@ Order = display order. The phone captures are not a nicety: they are the only le
 | Product repository (public) | `https://github.com/taras-svystun/taras-and-lisa` |
 | Presentation site repository (public) | `https://github.com/taras-svystun/typetodeploy-site` |
 | Production domain of this site | `https://typetodeploy.taras-and-lisa.com` |
-| Example bot commit | `https://github.com/taras-svystun/taras-and-lisa/commit/5fec45d` — post-guardrail, and the commit shown in both the video and the screenshots |
+| Example bot commit (headline) | `https://github.com/taras-svystun/taras-and-lisa/commit/5fec45d` — post-guardrail, the commit shown in both the video and the screenshots as the proof-of-work |
+| Example bot commit (undo) | `https://github.com/taras-svystun/taras-and-lisa/commit/6d81bdd` — the `/undo` action's commit, shown in demo step 06 |
 
-> The commit `70cd1ba…` is a *pre-guardrail* commit that demonstrates the scope-violation bug. It may be used deliberately in the "limits / what we learned" context, but **never** as the headline proof-of-work commit.
+> **Confirmed 2026-08-22:** `70cd1ba…` was a mistake and does not exist as a real reference commit —
+> removed. There are exactly **two** confirmed commits for this site: `5fec45d` (headline
+> proof-of-work) and `6d81bdd` (the `/undo` action). Do not introduce a third.
 
 ---
 
