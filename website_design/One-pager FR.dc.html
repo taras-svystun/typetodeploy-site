@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>TypeToDeploy — fiche de présentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<script src="./doc-page.js"></script>
+<style>
+  body { margin: 0; color: #12161F; font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #12161F; text-decoration: none; }
+  a:hover { color: #17406B; }
+</style>
+</helmet>
+
+<doc-page size="a4">
+  <section class="page" data-screen-label="Fiche A4">
+    <div style="height: 100%; padding: 12mm 13mm 10mm; display: flex; flex-direction: column">
+
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 8mm; padding-bottom: 4mm; border-bottom: 1.5pt solid #12161F">
+        <div>
+          <div style="font-size: 11pt; font-weight: 600; letter-spacing: 0.02em">TypeToDeploy</div>
+          <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17pt; font-weight: 600; line-height: 1.15; margin-top: 2mm">Mettre à jour son site web en envoyant un message.</div>
+        </div>
+        <div style="text-align: right; flex: 0 0 auto">
+          <div style="font-size: 8pt; font-weight: 500; color: #17406B">typetodeploy.taras-and-lisa.com</div>
+          <div style="font-size: 7.5pt; line-height: 1.35; color: #545C6B; margin-top: 1mm; max-width: 52mm">Projet en développement<br />Prototype fonctionnel en production</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 60fr 40fr; gap: 9mm; padding-top: 6mm; flex: 1 1 auto; min-height: 0">
+
+        <div style="display: flex; flex-direction: column; gap: 6mm">
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">Le problème</div>
+            <div style="display: flex; flex-direction: column; gap: 2mm; margin-top: 3mm">
+              <p style="font-size: 9.5pt; line-height: 1.45; margin: 0; text-wrap: pretty">Un site construit comme du code est rapide, bien référencé et peu coûteux à héberger. La contrepartie est directe : son propriétaire ne peut pas le modifier lui-même.</p>
+              <p style="font-size: 9.5pt; line-height: 1.45; margin: 0; text-wrap: pretty">Changer un tarif, une date ou une photo suppose de repasser par un développeur.</p>
+              <p style="font-size: 9.5pt; line-height: 1.45; margin: 0; text-wrap: pretty">Dans les faits, ces sites ne sont plus mis à jour. L’information devient fausse, et le site cesse de remplir sa fonction.</p>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">La solution</div>
+            <div style="display: flex; flex-direction: column; gap: 2.5mm; margin-top: 3mm">
+              <div style="display: grid; grid-template-columns: 5mm 1fr; gap: 2mm">
+                <div style="font-size: 9.5pt; font-weight: 600; color: #17406B">1</div>
+                <p style="font-size: 9.5pt; line-height: 1.4; margin: 0; text-wrap: pretty"><strong style="font-weight: 600">Vous écrivez.</strong> Un message en langage courant, dans une conversation Telegram.</p>
+              </div>
+              <div style="display: grid; grid-template-columns: 5mm 1fr; gap: 2mm">
+                <div style="font-size: 9.5pt; font-weight: 600; color: #17406B">2</div>
+                <p style="font-size: 9.5pt; line-height: 1.4; margin: 0; text-wrap: pretty"><strong style="font-weight: 600">L’agent prépare la modification.</strong> Le modèle identifie le champ concerné et prépare la modification exacte à appliquer.</p>
+              </div>
+              <div style="display: grid; grid-template-columns: 5mm 1fr; gap: 2mm">
+                <div style="font-size: 9.5pt; font-weight: 600; color: #17406B">3</div>
+                <p style="font-size: 9.5pt; line-height: 1.4; margin: 0; text-wrap: pretty"><strong style="font-weight: 600">La modification est vérifiée.</strong> Un contrôle automatique refuse toute modification située hors du périmètre annoncé, avant tout enregistrement.</p>
+              </div>
+              <div style="display: grid; grid-template-columns: 5mm 1fr; gap: 2mm">
+                <div style="font-size: 9.5pt; font-weight: 600; color: #17406B">4</div>
+                <p style="font-size: 9.5pt; line-height: 1.4; margin: 0; text-wrap: pretty"><strong style="font-weight: 600">Le site est mis à jour.</strong> Enregistrement dans le dépôt de code, reconstruction, publication, confirmation dans la conversation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">Ce qui est construit aujourd’hui</div>
+            <div style="display: flex; flex-direction: column; margin-top: 1mm">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Interprétation des messages en langage naturel</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Fonctionnel</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Modification du contenu du site (champs structurés)</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Fonctionnel</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Contrôle automatique du périmètre de modification</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Fonctionnel</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Enregistrement dans le dépôt et mise en ligne automatique</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Fonctionnel</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Utilisation par une personne non technique, sur un site en production</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Testé</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Utilisation par plusieurs personnes hors du projet</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #7C3AED; border-radius: 1mm; color: #7C3AED">À valider</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 5mm; min-width: 0">
+
+          <sc-if value="{{ showScreenshot }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <div style="border: 0.75pt solid #C6CDD6; border-radius: 1mm; overflow: hidden; background: #12161F">
+                <img src="images/bot_3_onepager.png" alt="Conversation Telegram : la demande d’ajout d’emojis, la réponse de l’agent et le lien du commit produit." style="display: block; width: 100%; height: auto" />
+              </div>
+              <p style="font-size: 7.5pt; line-height: 1.35; color: #545C6B; margin: 2mm 0 0; text-wrap: pretty">Une modification demandée dans la conversation. L’agent annonce les champs modifiés et renvoie le commit correspondant.</p>
+            </div>
+          </sc-if>
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">Ce qui reste à valider</div>
+            <div style="display: flex; flex-direction: column; gap: 2.5mm; margin-top: 3mm">
+              <p style="font-size: 9pt; line-height: 1.4; margin: 0; text-wrap: pretty">Le client est-il le propriétaire du site, ou l’agence qui le maintient ? Les deux hypothèses sont ouvertes ; les entretiens serviront à trancher.</p>
+              <p style="font-size: 9pt; line-height: 1.4; margin: 0; text-wrap: pretty">Une personne non technique met-elle réellement son site à jour plus souvent ? Suivi de la fréquence sur huit semaines, auprès d’un groupe pilote.</p>
+              <p style="font-size: 9pt; line-height: 1.4; margin: 0; text-wrap: pretty">Existe-t-il un prix acceptable pour ce service ? Test de prix auprès des personnes interrogées.</p>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">Phase 2</div>
+            <div style="display: flex; flex-direction: column; margin-top: 1mm">
+              <div style="display: grid; grid-template-columns: 12mm 1fr; gap: 2mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 7.5pt; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; padding-top: 0.4mm">Étape 1</span>
+                <span style="font-size: 9pt; line-height: 1.35">Étendre le contrôle de périmètre au code source.</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 12mm 1fr; gap: 2mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 7.5pt; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; padding-top: 0.4mm">Étape 2</span>
+                <span style="font-size: 9pt; line-height: 1.35">Ajouter et modifier sections, pages et mise en page, avec prévisualisation avant publication.</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 12mm 1fr; gap: 2mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 7.5pt; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; padding-top: 0.4mm">Étape 3</span>
+                <span style="font-size: 9pt; line-height: 1.35">Raccorder l’outil à un site existant qui n’a pas été conçu pour lui.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 8mm; margin-top: 6mm; padding-top: 4mm; border-top: 1.5pt solid #12161F">
+        <div style="display: flex; flex-direction: column; gap: 2mm">
+          <div style="display: flex; gap: 8mm">
+            <div>
+              <div style="font-size: 9pt; font-weight: 600">Lisa</div>
+              <div style="font-size: 7.5pt; color: #545C6B; margin-top: 0.5mm">Porteuse du projet — première utilisatrice</div>
+            </div>
+            <div>
+              <div style="font-size: 9pt; font-weight: 600">Taras</div>
+              <div style="font-size: 7.5pt; color: #545C6B; margin-top: 0.5mm">Associé technique — conception du système</div>
+            </div>
+          </div>
+          <div style="font-size: 8.5pt; color: #12161F">contact@taras-and-lisa.com<span style="color: #C6CDD6"> · </span>taras-and-lisa.com<span style="color: #C6CDD6"> · </span>github.com/taras-svystun</div>
+        </div>
+        <sc-if value="{{ showQr }}" hint-placeholder-val="{{ true }}">
+          <div style="flex: 0 0 auto; display: flex; align-items: center; gap: 3mm">
+            <div style="font-size: 7.5pt; line-height: 1.35; color: #545C6B; text-align: right; max-width: 30mm">Fiche complète, démonstration vidéo et code source</div>
+            <img src="images/qr-typetodeploy.png" alt="Code QR vers typetodeploy.taras-and-lisa.com" style="display: block; width: 21mm; height: 21mm" />
+          </div>
+        </sc-if>
+      </div>
+
+    </div>
+  </section>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showQr&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Fiche&quot;},&quot;showScreenshot&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Fiche&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showQr: this.props.showQr ?? true,
+      showScreenshot: this.props.showScreenshot ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>

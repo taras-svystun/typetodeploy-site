@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Démonstration — TypeToDeploy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #FFFFFF; color: #12161F; font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #17406B; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .15s, background-color .15s; }
+  a:hover { color: #0F2E4E; }
+  a:focus-visible, button:focus-visible { outline: 2px solid #17406B; outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</helmet>
+
+<div style="width: 1440px; margin: 0 auto; background: #FFFFFF">
+
+  <header style="border-bottom: 1px solid #E1E5EA; background: #FFFFFF">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between">
+      <a href="/" style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: #12161F; text-decoration: none">TypeToDeploy</a>
+      <nav style="display: flex; align-items: center; gap: 28px">
+        <a href="/demonstration" style="font-size: 15px; font-weight: 500; color: #12161F; text-decoration: none">Démonstration</a>
+        <div style="display: flex; align-items: center; gap: 8px; padding-left: 28px; border-left: 1px solid #E1E5EA">
+          <span style="font-size: 0.875rem; font-weight: 500; color: #12161F; padding: 4px 8px; border: 1px solid #C6CDD6; border-radius: 6px">FR</span>
+          <a href="/en/demo" hreflang="en" lang="en" style="font-size: 0.875rem; color: #545C6B; padding: 4px 8px; text-decoration: none">EN</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section data-screen-label="01 Titre + vidéo + vérification" style="background: #FFFFFF; padding: 72px 0 96px">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <a href="/" style="font-size: 0.9375rem">← Retour à l’accueil</a>
+      <h1 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 3.5rem; line-height: 1.08; letter-spacing: -0.015em; margin: 24px 0 0">Démonstration</h1>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Un message envoyé dans une conversation, la modification vérifiée, le site mis à jour — enregistré du début à la fin.</p>
+
+      <div style="max-width: 960px; margin-top: 48px">
+        <div style="border: 1px solid #C6CDD6; border-radius: 6px; background: #12161F; aspect-ratio: 16 / 9; overflow: hidden">
+          <video src="images/demo-web.mp4" poster="images/demo-poster.jpg" controls="controls" preload="metadata" playsinline="playsinline" style="display: block; width: 100%; height: 100%; object-fit: contain; background: #12161F"></video>
+        </div>
+        <p style="font-size: 0.875rem; color: #545C6B; margin: 14px 0 0">Enregistrement réel, sans montage du résultat : la conversation à gauche, le site à droite. La vidéo est accélérée : en conditions réelles, la mise à jour est publiée en une minute environ.</p>
+      </div>
+
+      <div style="max-width: 960px; margin-top: 40px; background: #EAF0F7; border: 1px solid #17406B; border-radius: 6px; padding: 40px">
+        <div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #17406B">Vérification</div>
+        <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 2rem; line-height: 1.25; font-weight: 600; color: #12161F; margin: 16px 0 0; max-width: 40ch; text-wrap: pretty">Cette modification a produit un commit réel dans le dépôt du site.</h2>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: 28px">
+          <a href="https://github.com/taras-svystun/taras-and-lisa/commit/5fec45d" target="_blank" rel="noopener" style="background: #17406B; color: #FFFFFF; font-size: 15px; font-weight: 500; padding: 13px 22px; border-radius: 6px; text-decoration: none">Voir le commit sur GitHub</a>
+          <a href="https://taras-and-lisa.com" target="_blank" rel="noopener" style="background: #FFFFFF; color: #12161F; font-size: 15px; font-weight: 500; padding: 12px 21px; border: 1px solid #C6CDD6; border-radius: 6px; text-decoration: none">Voir le site en ligne</a>
+        </div>
+        <sc-if value="{{ showCommitSha }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 24px; margin-top: 28px; padding-top: 20px; border-top: 1px solid #C6CDD6; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; color: #545C6B">
+            <span>commit 5fec45d</span>
+            <span>taras-svystun/taras-and-lisa</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="02 Étape par étape" style="background: #F6F7F9; border-top: 1px solid #E1E5EA; padding: 72px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">Étape par étape</h2>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Une seconde exécution du même parcours, en captures d’écran. Elle se lit sans le son et sans la vidéo.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 56px; padding-top: 40px; border-top: 1px solid #C6CDD6">
+        <div style="border: 1px solid #C6CDD6; border-radius: 6px; background: #FFFFFF; padding: 8px">
+          <img src="images/bot_1_v2.png" alt="Conversation Telegram : la commande /start et la réponse du bot qui liste ses commandes." style="display: block; width: 100%; height: auto; border-radius: 4px" />
+        </div>
+        <div>
+          <div style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; color: #545C6B">01</div>
+          <h3 style="font-size: 1.1875rem; font-weight: 600; margin: 10px 0 0">La conversation s’ouvre</h3>
+          <div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Commande</div><div style="background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 14px 16px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; line-height: 1.6; color: #12161F">/start</div><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Réponse du bot</div><p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 0">TypeToDeploy indique qu’il est en ligne et liste ses commandes : /status pour l’état du service, /reset pour effacer la mémoire de la conversation, /undo pour annuler la dernière modification.</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid #E1E5EA">
+        <div>
+          <div style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; color: #545C6B">02</div>
+          <h3 style="font-size: 1.1875rem; font-weight: 600; margin: 10px 0 0">Le service répond</h3>
+          <div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Commande</div><div style="background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 14px 16px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; line-height: 1.6; color: #12161F">/status</div><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Réponse du bot</div><p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 0">Le bot confirme qu’il tourne et donne l’heure du contrôle.</p><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Pourquoi c’est là</div><p style="font-size: 1rem; line-height: 1.6; color: #545C6B; margin: 0">La personne vérifie elle-même que le service fonctionne, sans demander à personne.</p>
+        </div>
+        <div style="border: 1px solid #C6CDD6; border-radius: 6px; background: #FFFFFF; padding: 8px">
+          <img src="images/bot_2_v2.png" alt="Conversation Telegram : la commande /status et la réponse « Bot is alive » avec l’horodatage." style="display: block; width: 100%; height: auto; border-radius: 4px" />
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid #E1E5EA">
+        <div style="border: 1px solid #C6CDD6; border-radius: 6px; background: #FFFFFF; padding: 8px">
+          <img src="images/site_before_v2.png" alt="Page d’accueil de taras-and-lisa.com sans emoji dans le titre ni le paragraphe." style="display: block; width: 100%; height: auto; border-radius: 4px" />
+        </div>
+        <div>
+          <div style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; color: #545C6B">03</div>
+          <h3 style="font-size: 1.1875rem; font-weight: 600; margin: 10px 0 0">Le site avant la demande</h3>
+          <div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Écran</div><p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 0">La page d’accueil de taras-and-lisa.com, en ligne.</p><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">À observer</div><p style="font-size: 1rem; line-height: 1.6; color: #545C6B; margin: 0">Le titre et le paragraphe d’accueil ne contiennent aucun emoji.</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid #E1E5EA">
+        <div>
+          <div style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; color: #545C6B">04</div>
+          <h3 style="font-size: 1.1875rem; font-weight: 600; margin: 10px 0 0">La demande est écrite, puis appliquée</h3>
+          <div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Demande</div><div style="background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 14px 16px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; line-height: 1.6; color: #12161F">Add emojis to the home page text to make it funnier</div><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Action de l’agent</div><p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 0">L’agent modifie trois champs de la page d’accueil — heroEyebrow, heroHeadline, heroSubhead — enregistre un commit, puis annonce le déploiement quand le site est reconstruit.</p><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Trace</div><p style="font-size: 1rem; line-height: 1.6; color: #545C6B; margin: 0">commit 5fec45d · taras-svystun/taras-and-lisa</p>
+        </div>
+        <div style="border: 1px solid #C6CDD6; border-radius: 6px; background: #FFFFFF; padding: 8px">
+          <img src="images/bot_3_v2.png" alt="Conversation Telegram : la demande d’ajout d’emojis, les champs modifiés, le lien du commit et la confirmation de déploiement." style="display: block; width: 100%; height: auto; border-radius: 4px" />
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid #E1E5EA">
+        <div style="border: 1px solid #C6CDD6; border-radius: 6px; background: #FFFFFF; padding: 8px">
+          <img src="images/site_after_v2.png" alt="Page d’accueil de taras-and-lisa.com avec des emojis dans le titre et le paragraphe." style="display: block; width: 100%; height: auto; border-radius: 4px" />
+        </div>
+        <div>
+          <div style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; color: #545C6B">05</div>
+          <h3 style="font-size: 1.1875rem; font-weight: 600; margin: 10px 0 0">Le site après le déploiement</h3>
+          <div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Écran</div><p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 0">La même page, rechargée après la mise en ligne.</p><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">À observer</div><p style="font-size: 1rem; line-height: 1.6; color: #545C6B; margin: 0">Les emojis sont présents dans le titre et dans le paragraphe d’accueil. La demande écrite dans la conversation est visible sur le site public.</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid #E1E5EA">
+        <div>
+          <div style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; color: #545C6B">06</div>
+          <h3 style="font-size: 1.1875rem; font-weight: 600; margin: 10px 0 0">La modification est annulée</h3>
+          <div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Commande</div><div style="background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 14px 16px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; line-height: 1.6; color: #12161F">/undo</div><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Action de l’agent</div><p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 0">Le bot cherche sa dernière modification, revient sur le fichier site/src/data/site.json, enregistre le commit d’annulation et confirme le déploiement.</p><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Trace</div><p style="font-size: 1rem; line-height: 1.6; color: #545C6B; margin: 0">commit 6d81bdd · taras-svystun/taras-and-lisa</p>
+        </div>
+        <div style="border: 1px solid #C6CDD6; border-radius: 6px; background: #FFFFFF; padding: 8px">
+          <img src="images/bot_4_v2.png" alt="Conversation Telegram : la commande /undo, le commit d’annulation et la confirmation de déploiement." style="display: block; width: 100%; height: auto; border-radius: 4px" />
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid #E1E5EA">
+        <div style="border: 1px solid #C6CDD6; border-radius: 6px; background: #FFFFFF; padding: 8px">
+          <img src="images/site_before_v2.png" alt="Page d’accueil de taras-and-lisa.com de nouveau sans emoji après l’annulation." style="display: block; width: 100%; height: auto; border-radius: 4px" />
+        </div>
+        <div>
+          <div style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; color: #545C6B">07</div>
+          <h3 style="font-size: 1.1875rem; font-weight: 600; margin: 10px 0 0">Le site revient à son état précédent</h3>
+          <div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">Écran</div><p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 0">La page d’accueil après l’annulation.</p><div style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; margin: 20px 0 6px">À observer</div><p style="font-size: 1rem; line-height: 1.6; color: #545C6B; margin: 0">Les emojis ont disparu. Le contenu est celui de l’étape 03.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="03 Limites" style="background: #FFFFFF; border-top: 1px solid #E1E5EA; padding: 72px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">Limites actuelles de la démonstration</h2>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Ce que le système ne sait pas encore faire, à la date de cet enregistrement.</p>
+      <div style="display: flex; flex-direction: column; margin-top: 32px; max-width: 68ch">
+        <div style="border-top: 1px solid #C6CDD6; padding: 18px 0">
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0">L’agent modifie du contenu structuré. Il ne modifie pas la structure ni la mise en page du site.</p>
+        </div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 18px 0">
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0">L’outil fonctionne sur un site conçu pour lui. Le raccordement à un site existant n’est pas encore possible.</p>
+        </div>
+        <div style="border-top: 1px solid #E1E5EA; border-bottom: 1px solid #E1E5EA; padding: 18px 0">
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0">Une seule personne utilise l’outil aujourd’hui, sur un seul site en production.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="04 Retour" style="background: #F6F7F9; border-top: 1px solid #E1E5EA; padding: 64px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 40px">
+      <p style="font-size: 1.1875rem; line-height: 1.5; color: #12161F; margin: 0; max-width: 52ch">Le reste du projet — ce qui est construit, ce qui reste à valider — est décrit sur la page d’accueil.</p>
+      <a href="/" style="background: #17406B; color: #FFFFFF; font-size: 15px; font-weight: 500; padding: 13px 22px; border-radius: 6px; text-decoration: none; flex: none">Retour à l’accueil</a>
+    </div>
+  </section>
+
+  <footer style="background: #FFFFFF; border-top: 1px solid #E1E5EA; padding: 40px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 32px">
+      <div style="display: flex; align-items: center; gap: 24px; font-size: 0.875rem; color: #545C6B">
+        <span>© 2026 TypeToDeploy</span>
+        <a href="mailto:contact@taras-and-lisa.com" style="font-size: 0.875rem">contact@taras-and-lisa.com</a>
+        <a href="https://github.com/taras-svystun/typetodeploy-site" target="_blank" rel="noopener" style="font-size: 0.875rem">GitHub</a>
+        <a href="https://taras-and-lisa.com" target="_blank" rel="noopener" style="font-size: 0.875rem">Site piloté par l’agent</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 0.875rem">
+        <span style="color: #12161F">FR</span>
+        <span style="color: #C6CDD6">/</span>
+        <a href="/en/demo" hreflang="en" lang="en" style="font-size: 0.875rem">EN</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showCommitSha&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Structure&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { showCommitSha: this.props.showCommitSha ?? true };
+  }
+}
+</script>
+</body>
+</html>

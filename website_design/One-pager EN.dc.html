@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>TypeToDeploy — project one-pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<script src="./doc-page.js"></script>
+<style>
+  body { margin: 0; color: #12161F; font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #12161F; text-decoration: none; }
+  a:hover { color: #17406B; }
+</style>
+</helmet>
+
+<doc-page size="a4">
+  <section class="page" data-screen-label="A4 sheet">
+    <div style="height: 100%; padding: 12mm 13mm 10mm; display: flex; flex-direction: column">
+
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 8mm; padding-bottom: 4mm; border-bottom: 1.5pt solid #12161F">
+        <div>
+          <div style="font-size: 11pt; font-weight: 600; letter-spacing: 0.02em">TypeToDeploy</div>
+          <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17pt; font-weight: 600; line-height: 1.15; margin-top: 2mm">Update your website by sending a message.</div>
+        </div>
+        <div style="text-align: right; flex: 0 0 auto">
+          <div style="font-size: 8pt; font-weight: 500; color: #17406B; white-space: nowrap">typetodeploy.taras-and-lisa.com/en</div>
+          <div style="font-size: 7.5pt; line-height: 1.35; color: #545C6B; margin-top: 1mm; max-width: 56mm">Project in development<br />Working prototype in production</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 60fr 40fr; gap: 9mm; padding-top: 6mm; flex: 1 1 auto; min-height: 0">
+
+        <div style="display: flex; flex-direction: column; gap: 6mm">
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">The problem</div>
+            <div style="display: flex; flex-direction: column; gap: 2mm; margin-top: 3mm">
+              <p style="font-size: 9.5pt; line-height: 1.45; margin: 0; text-wrap: pretty">A website built as code is fast, well-indexed and cheap to host. The trade-off is direct: its owner cannot change it.</p>
+              <p style="font-size: 9.5pt; line-height: 1.45; margin: 0; text-wrap: pretty">Updating a price, a date or a photo means going back to a developer.</p>
+              <p style="font-size: 9.5pt; line-height: 1.45; margin: 0; text-wrap: pretty">In practice these sites stop being updated. The information becomes wrong, and the site stops doing its job.</p>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">The solution</div>
+            <div style="display: flex; flex-direction: column; gap: 2.5mm; margin-top: 3mm">
+              <div style="display: grid; grid-template-columns: 5mm 1fr; gap: 2mm">
+                <div style="font-size: 9.5pt; font-weight: 600; color: #17406B">1</div>
+                <p style="font-size: 9.5pt; line-height: 1.4; margin: 0; text-wrap: pretty"><strong style="font-weight: 600">You write.</strong> A message in plain language, in a Telegram conversation.</p>
+              </div>
+              <div style="display: grid; grid-template-columns: 5mm 1fr; gap: 2mm">
+                <div style="font-size: 9.5pt; font-weight: 600; color: #17406B">2</div>
+                <p style="font-size: 9.5pt; line-height: 1.4; margin: 0; text-wrap: pretty"><strong style="font-weight: 600">The agent prepares the change.</strong> The model identifies the field concerned and prepares the exact edit to apply.</p>
+              </div>
+              <div style="display: grid; grid-template-columns: 5mm 1fr; gap: 2mm">
+                <div style="font-size: 9.5pt; font-weight: 600; color: #17406B">3</div>
+                <p style="font-size: 9.5pt; line-height: 1.4; margin: 0; text-wrap: pretty"><strong style="font-weight: 600">The change is verified.</strong> An automatic check refuses any edit outside the declared scope, before anything is written.</p>
+              </div>
+              <div style="display: grid; grid-template-columns: 5mm 1fr; gap: 2mm">
+                <div style="font-size: 9.5pt; font-weight: 600; color: #17406B">4</div>
+                <p style="font-size: 9.5pt; line-height: 1.4; margin: 0; text-wrap: pretty"><strong style="font-weight: 600">The site is updated.</strong> Committed to the repository, rebuilt, published, confirmed in the conversation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">What is built today</div>
+            <div style="display: flex; flex-direction: column; margin-top: 1mm">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Reading and interpreting natural-language messages</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Working</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Editing site content (structured fields)</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Working</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Automatic scope check on every change</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Working</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Commit to the repository and automatic publishing</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Working</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Use by a non-technical person, on a production site</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #15803D; border-radius: 1mm; color: #15803D">Tested</span>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 9.5pt; line-height: 1.35">Use by several people outside the project</span>
+                <span style="flex: 0 0 auto; white-space: nowrap; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.04em; padding: 0.6mm 1.8mm; border: 0.75pt solid #7C3AED; border-radius: 1mm; color: #7C3AED">To validate</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 5mm; min-width: 0">
+
+          <sc-if value="{{ showScreenshot }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <div style="border: 0.75pt solid #C6CDD6; border-radius: 1mm; overflow: hidden; background: #12161F">
+                <img src="images/bot_3_onepager.png" alt="Telegram conversation: the request to add emojis, the agent reply and the link to the commit it produced." style="display: block; width: 100%; height: auto" />
+              </div>
+              <p style="font-size: 7.5pt; line-height: 1.35; color: #545C6B; margin: 2mm 0 0; text-wrap: pretty">A change requested in the conversation. The agent names the fields it modified and returns the matching commit.</p>
+            </div>
+          </sc-if>
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">What still needs validating</div>
+            <div style="display: flex; flex-direction: column; gap: 2.5mm; margin-top: 3mm">
+              <p style="font-size: 9pt; line-height: 1.4; margin: 0; text-wrap: pretty">Is the customer the site owner, or the agency that maintains it? Both hypotheses are open; interviews will decide.</p>
+              <p style="font-size: 9pt; line-height: 1.4; margin: 0; text-wrap: pretty">Does a non-technical person actually update more often? Update frequency tracked over eight weeks with a pilot group.</p>
+              <p style="font-size: 9pt; line-height: 1.4; margin: 0; text-wrap: pretty">Is there an acceptable price for this service? Price testing with the people interviewed.</p>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 8pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #17406B; padding-bottom: 2mm; border-bottom: 0.75pt solid #C6CDD6">Phase 2</div>
+            <div style="display: flex; flex-direction: column; margin-top: 1mm">
+              <div style="display: grid; grid-template-columns: 12mm 1fr; gap: 2mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 7.5pt; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; padding-top: 0.4mm">Step 1</span>
+                <span style="font-size: 9pt; line-height: 1.35">Extend the scope check to the source code, not only content fields.</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 12mm 1fr; gap: 2mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 7.5pt; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; padding-top: 0.4mm">Step 2</span>
+                <span style="font-size: 9pt; line-height: 1.35">Add and edit sections, pages and layout, with a preview before publishing.</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 12mm 1fr; gap: 2mm; padding: 2.2mm 0; border-bottom: 0.5pt solid #E1E5EA">
+                <span style="font-size: 7.5pt; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #545C6B; padding-top: 0.4mm">Step 3</span>
+                <span style="font-size: 9pt; line-height: 1.35">Connect the tool to an existing site that was not built for it.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 8mm; margin-top: 6mm; padding-top: 4mm; border-top: 1.5pt solid #12161F">
+        <div style="display: flex; flex-direction: column; gap: 2mm">
+          <div style="display: flex; gap: 8mm">
+            <div>
+              <div style="font-size: 9pt; font-weight: 600">Lisa</div>
+              <div style="font-size: 7.5pt; color: #545C6B; margin-top: 0.5mm">Project lead — first user</div>
+            </div>
+            <div>
+              <div style="font-size: 9pt; font-weight: 600">Taras</div>
+              <div style="font-size: 7.5pt; color: #545C6B; margin-top: 0.5mm">Technical co-founder — built the system</div>
+            </div>
+          </div>
+          <div style="font-size: 8.5pt; color: #12161F">contact@taras-and-lisa.com<span style="color: #C6CDD6"> · </span>taras-and-lisa.com<span style="color: #C6CDD6"> · </span>github.com/taras-svystun</div>
+        </div>
+        <sc-if value="{{ showQr }}" hint-placeholder-val="{{ true }}">
+          <div style="flex: 0 0 auto; display: flex; align-items: center; gap: 3mm">
+            <div style="font-size: 7.5pt; line-height: 1.35; color: #545C6B; text-align: right; max-width: 30mm">Full page, video demo and source code</div>
+            <img src="images/qr-typetodeploy-en.png" alt="QR code to typetodeploy.taras-and-lisa.com/en" style="display: block; width: 21mm; height: 21mm" />
+          </div>
+        </sc-if>
+      </div>
+
+    </div>
+  </section>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showQr&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Fiche&quot;},&quot;showScreenshot&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Fiche&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showQr: this.props.showQr ?? true,
+      showScreenshot: this.props.showScreenshot ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>

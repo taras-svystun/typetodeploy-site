@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TypeToDeploy — mettre à jour son site web en envoyant un message</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #FFFFFF; color: #12161F; font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #17406B; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .15s, background-color .15s; }
+  a:hover { color: #0F2E4E; }
+  a:focus-visible, button:focus-visible { outline: 2px solid #17406B; outline-offset: 2px; }
+  table { border-collapse: collapse; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</helmet>
+
+<div style="width: 1440px; margin: 0 auto; background: #FFFFFF">
+
+  <header style="border-bottom: 1px solid #E1E5EA; background: #FFFFFF">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between">
+      <a href="/" style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: #12161F; text-decoration: none">TypeToDeploy</a>
+      <nav style="display: flex; align-items: center; gap: 28px">
+        <a href="/demonstration" style="font-size: 15px; color: #12161F; text-decoration: none">Démonstration</a>
+        <div style="display: flex; align-items: center; gap: 8px; padding-left: 28px; border-left: 1px solid #E1E5EA">
+          <span style="font-size: 13px; font-weight: 500; color: #12161F; padding: 4px 8px; border: 1px solid #C6CDD6; border-radius: 6px">FR</span>
+          <a href="/en/" hreflang="en" lang="en" style="font-size: 13px; color: #545C6B; padding: 4px 8px; text-decoration: none">EN</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section data-screen-label="01 Hero" style="background: #FFFFFF; padding: 96px 0 88px">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="display: block; width: 24px; height: 1px; background: #17406B"></span>
+        <span style="font-size: 13px; color: #545C6B">Projet en développement — prototype fonctionnel en production</span>
+      </div>
+      <h1 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 3.5rem; line-height: 1.08; letter-spacing: -0.015em; margin: 28px 0 0; max-width: 20ch; text-wrap: pretty">Mettre à jour son site web en envoyant un message.</h1>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 24px 0 0; text-wrap: pretty">TypeToDeploy permet à une personne sans compétence technique de modifier le contenu d’un site web professionnel depuis une simple conversation Telegram. La modification est vérifiée automatiquement, enregistrée dans le code source, puis mise en ligne.</p>
+      <div style="display: flex; align-items: center; gap: 12px; margin-top: 40px">
+        <a href="/demonstration" style="background: #17406B; color: #FFFFFF; font-size: 15px; font-weight: 500; padding: 13px 22px; border-radius: 6px; text-decoration: none">Voir la démonstration</a>
+        <sc-if value="{{ showSecondaryCta }}" hint-placeholder-val="{{ true }}">
+          <a href="https://taras-and-lisa.com" target="_blank" rel="noopener" style="background: #FFFFFF; color: #12161F; font-size: 15px; font-weight: 500; padding: 12px 21px; border: 1px solid #C6CDD6; border-radius: 6px; text-decoration: none">Voir le site piloté par l’agent</a>
+        </sc-if>
+      </div>
+      <sc-if value="{{ showHeroEvidence }}" hint-placeholder-val="{{ true }}">
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; margin-top: 56px; max-width: 900px">
+          <div style="border-top: 1px solid #C6CDD6; padding-top: 14px">
+            <div style="font-size: 0.9375rem; font-weight: 500; color: #12161F">Une utilisatrice</div>
+            <div style="font-size: 0.875rem; line-height: 1.5; color: #545C6B; margin-top: 4px">non technique, sur son propre site professionnel</div>
+          </div>
+          <div style="border-top: 1px solid #C6CDD6; padding-top: 14px">
+            <div style="font-size: 0.9375rem; font-weight: 500; color: #12161F">Un site en production</div>
+            <div style="font-size: 0.875rem; line-height: 1.5; color: #545C6B; margin-top: 4px">en ligne, modifié par l’agent</div>
+          </div>
+          <div style="border-top: 1px solid #C6CDD6; padding-top: 14px">
+            <div style="font-size: 0.9375rem; font-weight: 500; color: #12161F">Chaque modification</div>
+            <div style="font-size: 0.875rem; line-height: 1.5; color: #545C6B; margin-top: 4px">produit un commit vérifiable sur GitHub</div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section data-screen-label="02 Le problème" style="background: #F6F7F9; border-top: 1px solid #E1E5EA; padding: 96px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">Le problème</h2>
+      <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 28px; max-width: 68ch">
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Un site web moderne est rapide, bien référencé et peu coûteux à héberger, parce qu’il est construit comme du code plutôt que dans un outil d’édition.</p>
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">La contrepartie est directe : son propriétaire ne peut pas le modifier lui-même. Changer un tarif, une date, un horaire ou une photo suppose de repasser par un développeur.</p>
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Dans les faits, ces sites ne sont plus mis à jour. L’information devient fausse, et le site cesse de remplir sa fonction.</p>
+      </div>
+      <div style="margin-top: 48px; background: #EAF0F7; border: 1px solid #C6CDD6; border-radius: 6px; padding: 32px; max-width: 68ch">
+        <h3 style="font-size: 1.1875rem; font-weight: 600; color: #17406B; margin: 0">Ce projet vient d’un problème que nous avions</h3>
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 18px 0 0; max-width: 68ch; text-wrap: pretty">Lisa est coach et formatrice. Son site présente son activité, ses prestations et ses tarifs. Elle ne pouvait pas le modifier elle-même : chaque changement passait par Taras.</p>
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 16px 0 0; max-width: 68ch; text-wrap: pretty">Nous avons construit l’outil qui manquait. Lisa est aujourd’hui la première utilisatrice de TypeToDeploy, sur un site réellement en ligne.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="03 La solution" style="background: #FFFFFF; border-top: 1px solid #E1E5EA; padding: 96px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">La solution</h2>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Aucune interface à apprendre, aucun compte à créer, aucun tableau de bord. L’outil se place dans un canal que la personne utilise déjà.</p>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 56px">
+        <div style="border-left: 1px solid #E1E5EA; padding-left: 24px">
+          <div style="font-size: 1.1875rem; font-weight: 600; color: #17406B; line-height: 1">1</div>
+          <h3 style="font-size: 1rem; font-weight: 600; color: #12161F; margin: 16px 0 0">Vous écrivez</h3>
+          <p style="font-size: 0.9375rem; line-height: 1.6; color: #545C6B; margin: 10px 0 0">Un message en langage courant : « change le tarif du cours collectif à 45 € ».</p>
+        </div>
+        <div style="border-left: 1px solid #E1E5EA; padding-left: 24px">
+          <div style="font-size: 1.1875rem; font-weight: 600; color: #17406B; line-height: 1">2</div>
+          <h3 style="font-size: 1rem; font-weight: 600; color: #12161F; margin: 16px 0 0">L’agent prépare la modification</h3>
+          <p style="font-size: 0.9375rem; line-height: 1.6; color: #545C6B; margin: 10px 0 0">Le modèle identifie le champ concerné dans le contenu du site et prépare la modification exacte à appliquer.</p>
+        </div>
+        <div style="border-left: 1px solid #E1E5EA; padding-left: 24px">
+          <div style="font-size: 1.1875rem; font-weight: 600; color: #17406B; line-height: 1">3</div>
+          <h3 style="font-size: 1rem; font-weight: 600; color: #12161F; margin: 16px 0 0">La modification est vérifiée</h3>
+          <p style="font-size: 0.9375rem; line-height: 1.6; color: #545C6B; margin: 10px 0 0">Un contrôle automatique compare le périmètre annoncé et la modification réellement produite. Toute modification hors périmètre est refusée avant tout enregistrement.</p>
+        </div>
+        <div style="border-left: 1px solid #E1E5EA; padding-left: 24px">
+          <div style="font-size: 1.1875rem; font-weight: 600; color: #17406B; line-height: 1">4</div>
+          <h3 style="font-size: 1rem; font-weight: 600; color: #12161F; margin: 16px 0 0">Le site est mis à jour</h3>
+          <p style="font-size: 0.9375rem; line-height: 1.6; color: #545C6B; margin: 10px 0 0">La modification est enregistrée dans le dépôt de code, le site est reconstruit et publié. Une confirmation est renvoyée dans la conversation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="04 Aperçu démonstration" style="background: #F6F7F9; border-top: 1px solid #E1E5EA; padding: 96px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">Voir le système fonctionner</h2>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Une démonstration complète : un message envoyé, la modification vérifiée, le site mis à jour.</p>
+      <div style="max-width: 960px; margin-top: 40px">
+        <a href="/demonstration" style="display: block; border: 1px solid #C6CDD6; border-radius: 6px; overflow: hidden; background: #12161F" style-hover="border-color: #17406B">
+          <img src="images/demo-poster.jpg" alt="La conversation Telegram à gauche, le site taras-and-lisa.com à droite, pendant une modification." style="display: block; width: 100%; height: auto" />
+        </a>
+        <a href="/demonstration" style="display: inline-block; font-size: 0.9375rem; font-weight: 500; margin-top: 14px">Voir la démonstration complète</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="05 État d’avancement" style="background: #FFFFFF; border-top: 1px solid #E1E5EA; padding: 96px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">Ce qui est construit aujourd’hui</h2>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Chaque élément ci-dessous est indiqué avec son état réel. Rien n’est présenté comme terminé s’il ne l’est pas.</p>
+      <table style="width: 100%; max-width: 900px; margin-top: 40px; font-size: 0.9375rem">
+        <caption style="text-align: left; font-size: 0.875rem; color: #545C6B; padding-bottom: 14px">État réel de chaque composant du système. Aucun élément n’est présenté comme terminé s’il ne l’est pas.</caption>
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #545C6B; padding: 0 0 12px; border-bottom: 1px solid #C6CDD6">Élément</th>
+            <th scope="col" style="text-align: right; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #545C6B; padding: 0 0 12px; border-bottom: 1px solid #C6CDD6; width: 190px">État</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Réception et interprétation des messages en langage naturel</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #15803D; border: 1px solid #15803D; background: #15803D14">Fonctionnel</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Modification du contenu du site (champs structurés)</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #15803D; border: 1px solid #15803D; background: #15803D14">Fonctionnel</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Contrôle automatique du périmètre de modification</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #15803D; border: 1px solid #15803D; background: #15803D14">Fonctionnel</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Enregistrement dans le dépôt de code et mise en ligne automatique</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #15803D; border: 1px solid #15803D; background: #15803D14">Fonctionnel</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Notification de confirmation et annulation d’une modification</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #15803D; border: 1px solid #15803D; background: #15803D14">Fonctionnel</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Traçabilité complète des appels au modèle</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #15803D; border: 1px solid #15803D; background: #15803D14">Fonctionnel</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Utilisation par une personne non technique sur un site en production</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #15803D; border: 1px solid #15803D; background: #15803D14">Testé</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Utilisation par plusieurs personnes hors du projet</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #7C3AED; border: 1px solid #7C3AED; background: #7C3AED14">À valider</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Modification de la structure et de la mise en page du site</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #545C6B; border: 1px solid #545C6B; background: #545C6B14">Phase 2</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 24px 16px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.5">Modèle économique</td>
+            <td style="padding: 16px 0; border-bottom: 1px solid #E1E5EA; text-align: right"><span style="display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 6px; color: #7C3AED; border: 1px solid #7C3AED; background: #7C3AED14">À valider</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <sc-if value="{{ showStatusLegend }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; gap: 28px; margin-top: 20px; font-size: 0.875rem; color: #545C6B">
+          <span>Fonctionnel — en service aujourd’hui</span>
+          <span>Testé — vérifié en conditions réelles</span>
+          <span>Phase 2 — non commencé</span>
+          <span>À valider — hypothèse</span>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section data-screen-label="06 Point technique" style="background: #F6F7F9; border-top: 1px solid #E1E5EA; padding: 72px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.25; margin: 0; max-width: 24ch; text-wrap: pretty">Le point technique central : empêcher l’agent de modifier ce qu’on ne lui a pas demandé</h2>
+      <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 32px; max-width: 68ch">
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Un modèle de langage qui écrit directement dans le code source d’un site en production représente un risque concret.</p>
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Lors des premiers essais, les consignes écrites dans le prompt n’ont pas suffi : le modèle a modifié des champs situés en dehors de la demande, tout en justifiant sa décision dans sa réponse.</p>
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">La réponse à ce problème n’est pas une meilleure consigne, mais un contrôle déterministe. Avant tout enregistrement, le système compare la liste des champs réellement modifiés et le périmètre déclaré par l’agent. Si les deux ne correspondent pas, la modification est refusée et rien n’est écrit.</p>
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">C’est ce contrôle qui rend l’outil utilisable sur un site réel plutôt que sur une démonstration.</p>
+      </div>
+      <div style="margin-top: 36px; max-width: 68ch; background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 20px 24px">
+        <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #545C6B; margin-bottom: 14px">Exemple d’une modification refusée par le contrôle</div>
+        <div style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; line-height: 1.9; color: #12161F">
+        <div>périmètre déclaré : tarif_cours_collectif</div>
+        <div>champs modifiés&nbsp;&nbsp;: tarif_cours_collectif, horaires_studio → <span style="color: #B45309">refusé</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="07 Reste à valider" style="background: #FFFFFF; border-top: 1px solid #E1E5EA; padding: 72px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">Ce qui reste à valider</h2>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Le prototype fonctionne. La demande, elle, n’est pas encore démontrée. Voici les hypothèses que je cherche à vérifier et la méthode prévue.</p>
+      <table style="width: 100%; margin-top: 40px; font-size: 0.9375rem; table-layout: fixed">
+        <caption style="text-align: left; font-size: 0.875rem; color: #545C6B; padding-bottom: 14px">Hypothèses ouvertes, méthode de vérification et critère de réussite.</caption>
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #545C6B; padding: 0 24px 12px 0; border-bottom: 1px solid #C6CDD6; width: 36%">Hypothèse</th>
+            <th scope="col" style="text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #545C6B; padding: 0 24px 12px 0; border-bottom: 1px solid #C6CDD6; width: 32%">Méthode prévue</th>
+            <th scope="col" style="text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #545C6B; padding: 0 0 12px; border-bottom: 1px solid #C6CDD6; width: 32%">Critère de réussite</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.55; vertical-align: top">Une personne non technique met effectivement son site à jour plus souvent lorsque la barrière disparaît.</td>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">Suivi de la fréquence de mise à jour sur 8 semaines, auprès d’un premier groupe d’utilisateurs pilotes.</td>
+            <td style="padding: 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">Une augmentation nette et mesurable par rapport à la période précédente.</td>
+          </tr>
+          <tr>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.55; vertical-align: top">Le premier client est le propriétaire du site : indépendant, petite structure ou association.</td>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">Entretiens qualitatifs auprès de propriétaires de sites professionnels.</td>
+            <td style="padding: 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">Une majorité déclare renoncer régulièrement à une mise à jour à cause de la démarche à engager.</td>
+          </tr>
+          <tr>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.55; vertical-align: top">Ou bien le premier client est l’agence ou le développeur indépendant qui maintient ces sites.</td>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">Entretiens qualitatifs auprès d’agences web et de développeurs indépendants.</td>
+            <td style="padding: 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">Une majorité identifie les petites modifications client comme une charge fréquente et peu rentable.</td>
+          </tr>
+          <tr>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.55; vertical-align: top">Le contrôle de périmètre est suffisant pour permettre une utilisation sans supervision technique.</td>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">Campagne de tests adverses : demandes ambiguës, contradictoires ou hors périmètre.</td>
+            <td style="padding: 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">Aucune modification hors périmètre enregistrée.</td>
+          </tr>
+          <tr>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #12161F; line-height: 1.55; vertical-align: top">Il existe un prix acceptable pour ce service.</td>
+            <td style="padding: 18px 24px 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">Test de prix auprès des personnes interrogées.</td>
+            <td style="padding: 18px 0; border-bottom: 1px solid #E1E5EA; color: #545C6B; line-height: 1.55; vertical-align: top">À définir à l’issue des entretiens.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size: 0.9375rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 24px 0 0; text-wrap: pretty">Les deux hypothèses de segment sont présentées ensemble volontairement. Nous ne savons pas encore laquelle est la bonne, et les entretiens servent précisément à trancher.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="08 Phase 2" style="background: #F6F7F9; border-top: 1px solid #E1E5EA; padding: 72px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">Phase 2 — de l’édition de contenu à l’édition du site</h2>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Aujourd’hui l’agent modifie du contenu structuré. L’étape suivante consiste à lui permettre de modifier le site lui-même.</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px">
+        <div style="background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 28px">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #17406B">Étape 1</div>
+          <p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 14px 0 0">Étendre le contrôle de périmètre au code source, et non plus seulement aux champs de contenu.</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 28px">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #17406B">Étape 2</div>
+          <p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 14px 0 0">Permettre l’ajout et la modification de sections, de pages et de mise en page, avec prévisualisation avant publication.</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 28px">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #17406B">Étape 3</div>
+          <p style="font-size: 1rem; line-height: 1.6; color: #12161F; margin: 14px 0 0">Permettre le raccordement de l’outil à un site existant qui n’a pas été conçu pour lui.</p>
+        </div>
+      </div>
+      <p style="font-size: 0.9375rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 24px 0 0">Chaque étape dépend de la précédente. La priorité reste la fiabilité avant l’étendue des fonctions.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="09 Impact visé" style="background: #FFFFFF; border-top: 1px solid #E1E5EA; padding: 72px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">À qui cela s’adresse</h2>
+      <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 28px; max-width: 68ch">
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Les indépendants, les petites structures et les associations qui disposent d’un site et qui n’ont pas les moyens de mobiliser un développeur pour une modification de dix minutes.</p>
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Et, en amont, les agences et développeurs indépendants qui maintiennent ces sites : les petites demandes de leurs clients sont fréquentes, peu rentables et difficiles à planifier.</p>
+        <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">L’objectif n’est pas de remplacer un outil de gestion de contenu, mais de rendre modifiable un site qui, aujourd’hui, ne l’est pas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="10 L’équipe" style="background: #F6F7F9; border-top: 1px solid #E1E5EA; padding: 72px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">L’équipe</h2>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Deux personnes, deux rôles distincts, et un projet né d’un besoin que nous avions nous-mêmes.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px">
+        <div style="background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 32px">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #545C6B">Porteuse du projet</div>
+          <h3 style="font-size: 1.1875rem; font-weight: 600; margin: 12px 0 0"><a href="https://www.linkedin.com/in/yelyzaveta-machukha/" target="_blank" rel="noopener">Lisa</a></h3>
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 18px 0 0">Coach et formatrice. Elle conçoit et anime des accompagnements en communication, en encadrement de groupes et en pratiques de plein air.</p>
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 14px 0 0">C’est son site professionnel qui est à l’origine du projet, et c’est elle qui utilise l’outil au quotidien. Elle porte la relation utilisateur, les entretiens de validation et le développement de l’activité.</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E1E5EA; border-radius: 6px; padding: 32px">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #545C6B">Associé technique</div>
+          <h3 style="font-size: 1.1875rem; font-weight: 600; margin: 12px 0 0"><a href="https://www.linkedin.com/in/taras-svystun-97347723b/" target="_blank" rel="noopener">Taras</a></h3>
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 18px 0 0">Quatre ans d’expérience en développement logiciel et en apprentissage automatique.</p>
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 14px 0 0">Il a conçu et développé l’ensemble du système : l’agent, le contrôle de périmètre, l’intégration au dépôt de code et la mise en production.</p>
+        </div>
+      </div>
+      <p style="font-size: 0.9375rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 24px 0 0; text-wrap: pretty">L’utilisatrice de l’outil et sa conceptrice sont dans la même équipe. Chaque limite rencontrée à l’usage revient directement dans le développement.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="11 Accompagnement" style="background: #FFFFFF; border-top: 1px solid #E1E5EA; padding: 72px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">Ce que l’accompagnement de Pépite apporterait</h2>
+      <p style="font-size: 1.1875rem; line-height: 1.6; color: #545C6B; max-width: 68ch; margin: 20px 0 0; text-wrap: pretty">Le prototype est construit et fonctionne. Ce qui nous manque n’est pas technique.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; margin-top: 40px; max-width: 960px">
+        <div style="border-top: 1px solid #E1E5EA; padding: 20px 0">
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Un accès à des utilisateurs test — indépendants, petites structures, associations — pour vérifier nos hypothèses dans des conditions réelles plutôt qu’en interne.</p>
+        </div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 20px 0">
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Un regard extérieur pour trancher entre nos deux hypothèses de segment, et pour construire un modèle économique. C’est aujourd’hui notre principale zone d’incertitude.</p>
+        </div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 20px 0">
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Un cadre de travail et un rythme de suivi régulier, en parallèle de nos activités.</p>
+        </div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 20px 0">
+          <p style="font-size: 1rem; line-height: 1.65; color: #12161F; margin: 0; text-wrap: pretty">Un financement couvrant l’hébergement, les coûts d’appel au modèle et le temps consacré à la phase pilote.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="12 Contact" style="background: #F6F7F9; border-top: 1px solid #E1E5EA; padding: 72px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+      <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.2; margin: 0">Contact</h2>
+      <div style="display: grid; grid-template-columns: 200px 1fr; gap: 0; margin-top: 36px; max-width: 820px; font-size: 1rem">
+        <div style="border-top: 1px solid #C6CDD6; padding: 18px 0; color: #545C6B">Courriel</div>
+        <div style="border-top: 1px solid #C6CDD6; padding: 18px 0"><a href="mailto:contact@taras-and-lisa.com">contact@taras-and-lisa.com</a></div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 18px 0; color: #545C6B">Site piloté par l’agent</div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 18px 0"><a href="https://taras-and-lisa.com" target="_blank" rel="noopener">taras-and-lisa.com</a></div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 18px 0; color: #545C6B">Dépôt du produit</div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 18px 0"><a href="https://github.com/taras-svystun/taras-and-lisa" target="_blank" rel="noopener">github.com/taras-svystun/taras-and-lisa</a></div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 18px 0; color: #545C6B">Dépôt de ce site</div>
+        <div style="border-top: 1px solid #E1E5EA; padding: 18px 0"><a href="https://github.com/taras-svystun/typetodeploy-site" target="_blank" rel="noopener">github.com/taras-svystun/typetodeploy-site</a></div>
+        <div style="border-top: 1px solid #E1E5EA; border-bottom: 1px solid #E1E5EA; padding: 18px 0; color: #545C6B">LinkedIn</div>
+        <div style="border-top: 1px solid #E1E5EA; border-bottom: 1px solid #E1E5EA; padding: 18px 0; display: flex; gap: 20px"><a href="https://www.linkedin.com/in/yelyzaveta-machukha/" target="_blank" rel="noopener">Lisa</a><span style="color: #C6CDD6">·</span><a href="https://www.linkedin.com/in/taras-svystun-97347723b/" target="_blank" rel="noopener">Taras</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background: #FFFFFF; border-top: 1px solid #E1E5EA; padding: 40px 0">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 32px">
+      <div style="display: flex; align-items: center; gap: 24px; font-size: 0.875rem; color: #545C6B">
+        <span>© 2026 TypeToDeploy</span>
+        <a href="mailto:contact@taras-and-lisa.com" style="font-size: 0.875rem">contact@taras-and-lisa.com</a>
+        <a href="https://github.com/taras-svystun/typetodeploy-site" target="_blank" rel="noopener" style="font-size: 0.875rem">GitHub</a>
+        <a href="https://taras-and-lisa.com" target="_blank" rel="noopener" style="font-size: 0.875rem">Site piloté par l’agent</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 0.875rem">
+        <span style="color: #12161F">FR</span>
+        <span style="color: #C6CDD6">/</span>
+        <a href="/en/" hreflang="en" lang="en" style="font-size: 0.875rem">EN</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showHeroEvidence&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Structure&quot;},&quot;showSecondaryCta&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Structure&quot;},&quot;showStatusLegend&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Structure&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showHeroEvidence: this.props.showHeroEvidence ?? true,
+      showSecondaryCta: this.props.showSecondaryCta ?? true,
+      showStatusLegend: this.props.showStatusLegend ?? false
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,29 +1,7 @@
-# TypeToDeploy — Pépite Presentation Website — BRIEF
+# TypeToDeploy — PeeL Presentation Website — BRIEF
 
-> This file is the single source of truth for **why** things are the way they are.
-> `website_design/` is the single source of truth for **what the pages look like**.
-> Claude Code must read this file at the start of every session.
-
----
-
-## 0.0 Where everything lives
-
-Claude Code is started from a parent directory containing two sibling repositories:
-
-```
-<parent>/
-├── CLAUDE.md                  ← boundary rules, read first
-├── taras-and-lisa/            ← PRODUCT repo. READ-ONLY. The Telegram bot writes here.
-└── typetodeploy-site/         ← THIS project. All work happens here.
-    ├── BRIEF.md               ← this file
-    └── website_design/        ← finished design, produced in Claude Design
-        ├── *.html             ← 10 design files (see §2.4)
-        └── images/            ← every screenshot, the QR code, the video
-```
-
-**Absolute rule:** never create, edit, move, or delete anything inside `taras-and-lisa/`. It is production and a live bot commits to it. Read it only when a phase explicitly asks.
-
-**`website_design/` is committed and must never be deleted.** It is the design record. Astro only builds `src/` and `public/`, so it is automatically excluded from the site output — leave it where it is.
+> This file is the single source of truth for the project.
+> Drop it at the root of the **new** repository. Claude Code must read it at the start of every session.
 
 ---
 
@@ -55,9 +33,6 @@ Claude Code is started from a parent directory containing two sibling repositori
 
 | Decision | Value | Reason |
 |---|---|---|
-| Design source | `website_design/*.html` (10 files) | Approved design already exists. Implementation is a port, not a redesign. See §2.4. |
-| Component budget | ~8 files total: `Layout`, `Header`, `Footer`, `HomeBody`, `DemoBody`, `Badge`, `ScreenshotRow`, `StatusRow` | Every section appears exactly once per page. Splitting twelve sections into twelve components buys nothing and multiplies drift from the design. |
-| Language handling | One markup body per page type, two dictionaries | FR and EN are the same layout. Two dictionaries, not two templates. |
 | Repository | **New, separate public repo:** `taras-svystun/typetodeploy-site` | The bot commits to `taras-svystun/taras-and-lisa`. Isolation prevents the presentation site from being broken by the product. Public, because verifiability is the point. |
 | Domain | `typetodeploy.taras-and-lisa.com` (subdomain of the existing Cloudflare zone) | Free, contains the product name, HTTPS handled automatically. |
 | Existing Workers (do not touch) | `typetodeploy-bot`, `taras-and-lisa` | These are production. The new site is a third, independent Worker. |
@@ -144,31 +119,6 @@ Borrow from institutional design only the *habits*: strong information hierarchy
 - **Focus:** `outline: 2px solid var(--accent); outline-offset: 2px;` on every interactive element. Never `outline: none`.
 - **Animation:** none, except `transition: background-color .15s` on buttons/links. Respect `prefers-reduced-motion`.
 - **Icons:** avoid entirely, or use inline SVG numerals (1/2/3/4) for the "how it works" steps. No icon library.
-
-### 2.4 The design files are the specification
-
-`website_design/` contains the finished, approved design as static HTML: **four pages × two viewports (1440px and 375px), plus the one-pager.** Ten files in total. Every layout, spacing value, colour, type size, and every word of copy in both languages already exists there.
-
-**Precedence, when two sources disagree:**
-
-1. **`website_design/*.html`** — wins on anything visual or textual: layout, spacing, colours, type, wording, section order, labels.
-2. **This BRIEF** — wins on anything structural or behavioural: routing, i18n strategy, accessibility rules, SEO, hosting, honesty constraints, what must not be invented.
-3. If a genuine conflict exists that neither rule settles, **stop and ask**. Do not pick one silently.
-
-**What this means for implementation:** the job is a **port**, not a design exercise. Claude Code reproduces what is in the design files inside Astro. It does not redesign, does not "improve", does not add sections, does not reorder, and does not rewrite copy. The BRIEF's copy sections (§5, §6) exist to explain intent and to catch drift — the authoritative wording is whatever is in the HTML.
-
-**Desktop file + mobile file = one responsive page.** The two viewport files are not two sites. The desktop file gives the base styles; the mobile file gives the overrides. They must be merged into a single responsive stylesheet with media queries. Never ship two page templates for one page.
-
-**Things in the design files that must be changed during the port** (design tools emit them; production must not keep them):
-
-| In the design file | Replace with |
-|---|---|
-| Google Fonts `<link>` or `@import` | `@fontsource-variable/inter` and `@fontsource-variable/source-serif-4`, imported in the layout |
-| Any CDN script or stylesheet | nothing — remove it |
-| Hard-coded absolute widths on the page wrapper | `max-width: var(--width-page)` + fluid padding |
-| Duplicated CSS across the ten files | one shared `src/styles/global.css` + Astro scoped `<style>` per page |
-| Image paths pointing into `website_design/images/` | imports from `src/assets/` (screenshots) or `/media/` (video, poster, favicon, OG) |
-| Literal text in the markup | a key in `src/i18n/fr.ts` / `en.ts` |
 
 ---
 
@@ -331,22 +281,19 @@ Optional visual: a small monospace block showing a rejected diff. Two lines max.
 ### 5.7 Ce qui reste à valider
 
 **H2:** `Ce qui reste à valider`
-**Lead:** `Le prototype fonctionne. La demande, elle, n'est pas encore démontrée. Voici les hypothèses que nous cherchons à vérifier et la méthode prévue.`
-
-> Voice fix: the rest of the site speaks as `nous`. This lead used to say `je`. Keep `nous` everywhere.
+**Lead:** `Le prototype fonctionne. La demande, elle, n'est pas encore démontrée. Voici les hypothèses que je cherche à vérifier et la méthode prévue.`
 
 | Hypothèse | Méthode prévue | Critère de réussite |
 |---|---|---|
 | `Une personne non technique met effectivement son site à jour plus souvent lorsque la barrière disparaît.` | `Suivi de la fréquence de mise à jour sur 8 semaines, auprès d'un premier groupe d'utilisateurs pilotes.` | `Une augmentation nette et mesurable par rapport à la période précédente.` |
 | `Le premier client est le propriétaire du site : indépendant, petite structure ou association.` | `Entretiens qualitatifs auprès de propriétaires de sites professionnels.` | `Une majorité déclare renoncer régulièrement à une mise à jour à cause de la démarche à engager.` |
 | `Ou bien le premier client est l'agence ou le développeur indépendant qui maintient ces sites.` | `Entretiens qualitatifs auprès d'agences web et de développeurs indépendants.` | `Une majorité identifie les petites modifications client comme une charge fréquente et peu rentable.` |
-| `Le contrôle de périmètre est suffisant pour permettre une utilisation sans supervision technique.` | `Campagne de tests adverses : demandes ambiguës, contradictoires ou hors périmètre.` | `Aucune modification hors périmètre enregistrée.` |
-| `Il existe un prix acceptable pour ce service.` | `Test de prix auprès des personnes interrogées.` | `À définir à l'issue des entretiens.` |
-
 **Note rendered under the table, in `--ink-muted`:**
 `Les deux hypothèses de segment sont présentées ensemble volontairement. Nous ne savons pas encore laquelle est la bonne, et les entretiens servent précisément à trancher.`
 
 > Admitting an open question in writing is a deliberate credibility choice for this jury. Do not soften it.
+| `Le contrôle de périmètre est suffisant pour permettre une utilisation sans supervision technique.` | `Campagne de tests adverses : demandes ambiguës, contradictoires ou hors périmètre.` | `Aucune modification hors périmètre enregistrée.` |
+| `Il existe un prix acceptable pour ce service.` | `Test de prix auprès des personnes interrogées.` | `À définir à l'issue des entretiens.` |
 
 > Adjust wording to match the founder's real intent, but **never** convert a hypothesis into a result.
 
@@ -535,428 +482,6 @@ Order = display order. The phone captures are not a nicety: they are the only le
 
 ---
 
-## 9. SEO / metadata requirements
-
-Per page:
-- `<title>` — FR home: `TypeToDeploy — mettre à jour son site web en envoyant un message`
-- `<meta name="description">` — 150–160 characters, distinct per page and per language
-- `<html lang="fr">` / `<html lang="en">`
-- `<link rel="alternate" hreflang="fr" href="…">`, `hreflang="en"`, `hreflang="x-default"` → FR
-- `<link rel="canonical">`
-- Open Graph: `og:title`, `og:description`, `og:image` (absolute URL), `og:url`, `og:type=website`, `og:locale` (`fr_FR` / `en_US`)
-- Twitter: `twitter:card=summary_large_image`
-- `@astrojs/sitemap` with i18n config
-- `robots.txt` allowing everything
-
----
-
-## 10. Accessibility requirements (non-negotiable)
-
-- Contrast ≥ 4.5:1 for body text, ≥ 3:1 for large text. Verify `--ink-muted` on `--surface-alt`.
-- One `<h1>` per page. No heading level skipped.
-- All images have meaningful `alt` in the page language. Decorative images `alt=""`.
-- Video: `controls` present; a text summary of the video exists on the page (the screenshot section serves this).
-- Every link and button reachable by keyboard, with a visible focus ring.
-- Skip-to-content link as the first focusable element.
-- Language switch link has an explicit accessible label (`hreflang` + `lang` attributes).
-- `prefers-reduced-motion` respected.
-
----
-
-## 11. Claude Code — phased implementation plan
-
-> Copy each phase as a separate message. **Do not** paste more than one phase at a time.
-> Every phase ends with a mandatory STOP. Do not let Claude Code chain phases.
->
-> **Where to run each phase:**
-> - **Phase 0** — from the parent directory (it needs to read both repos).
-> - **Phases 1–7** — quit Claude Code and restart it *inside* `typetodeploy-site/`. From then on the product repo is physically outside the working directory and cannot be touched by accident.
->
-> **Session opener** (paste before the first phase of every session):
-> `Read BRIEF.md in full, then list: the ten files in website_design/, the precedence rule from §2.4, and the component budget from §1. Then wait — I will give you one phase at a time.`
-
----
-
-### PHASE 0 — Inventory. Change nothing.
-
-```
-Read BRIEF.md at typetodeploy-site/BRIEF.md in full before doing anything.
-
-You are in READ-ONLY mode for this entire phase. Do not create, edit, move, or
-delete any file, in any directory, for any reason.
-
-Produce one markdown report answering all of the following. Be specific: file
-paths, exact values, actual counts. No guessing — if something is absent, say
-"absent" rather than assuming.
-
-PART A — the design files (typetodeploy-site/website_design/)
-
-A1. List every .html file with its byte size, and state which page and which
-    viewport each one is (Homepage / Demo / One-pager, FR / EN, 1440 / 375).
-A2. For ONE desktop file, describe how it is built:
-    - Is the CSS in a <style> block, inline style attributes, or an external file?
-    - Is the markup semantic (header/main/section/table) or generic divs?
-    - Are there absolute positions or fixed pixel widths on the page wrapper?
-    - Are fonts loaded from a CDN? Give the exact URL if so.
-    - Any <script> tags? Quote them.
-A3. Diff the desktop and mobile file for the SAME page. Report only what actually
-    differs: which CSS values change, which elements are reordered, which images
-    are swapped. This diff is the media-query specification — I need it explicit.
-A4. List every file in website_design/images/ with its size and pixel dimensions.
-    Say which are screenshots, which is the QR code, which is the video, which is
-    the poster frame. Flag anything over 500 KB.
-A5. Extract the full set of CSS custom properties actually used in the design
-    files. Put them in a table next to the token values written in BRIEF §2.2 and
-    mark every row MATCH or DIFFERS. Do not change anything — just report.
-A6. Count the sections in the desktop homepage file and match them against the
-    twelve rows in BRIEF §4. Report any extra, missing, or reordered section.
-
-PART B — the sibling product repo (../taras-and-lisa)
-
-Read only. Do not clone it, do not copy from it, do not write to it.
-
-B1. Astro version, Node version, package manager.
-B2. Whether Tailwind or any CSS framework is used.
-B3. TypeScript, and tsconfig strictness.
-B4. How it deploys to Cloudflare: Pages or Workers, adapter or none, the wrangler
-    config filename, the build command, the output directory.
-B5. Anything worth reusing verbatim in the new site. If the honest answer is
-    "nothing, the new site has its own design", say that.
-
-PART C — verdict
-
-C1. Any place where the design files and BRIEF.md contradict each other.
-C2. Any file listed in BRIEF §8 that is missing from website_design/images/.
-C3. The three things most likely to go wrong in this port, and how you would
-    avoid each.
-
-Output the report. Propose no implementation. Write no code.
-
-STOP and wait for my approval.
-```
-
----
-
-### PHASE 1 — Scaffold + extract the real design system
-
-```
-Read BRIEF.md §1, §2 and §2.4.
-
-Restart context: you are now working inside typetodeploy-site/. The product repo
-is outside this directory and out of scope.
-
-1. Create an Astro project in this directory, preserving BRIEF.md and
-   website_design/ untouched:
-     npm create astro@latest . -- --template minimal --typescript strict --no-install --no-git
-   then npm install.
-
-2. Install exactly these and nothing more:
-     @astrojs/sitemap
-     @fontsource-variable/inter
-     @fontsource-variable/source-serif-4
-
-   No Tailwind. No UI framework. No icon library. No animation library. No
-   Cloudflare adapter — this site is fully static with no server routes.
-
-3. astro.config.mjs:
-   - site: 'https://typetodeploy.taras-and-lisa.com'
-   - output: 'static'
-   - i18n: { defaultLocale: 'fr', locales: ['fr','en'], routing: { prefixDefaultLocale: false } }
-   - sitemap() with the matching i18n config
-
-4. Create src/styles/global.css. Build it FROM THE DESIGN FILES, not from memory:
-   - Take the custom-property block you extracted in Phase 0 (A5). Where a design
-     value differs from BRIEF §2.2, the DESIGN VALUE WINS — but list every such
-     row in your report so I can see it.
-   - Add a modern CSS reset.
-   - Add base element styles (body, headings, p, a, ul, table) using those tokens,
-     matching what the desktop design file actually renders.
-   - Add the small number of utilities the design genuinely uses. Do not invent a
-     utility system. If the design uses four layout patterns, write four classes.
-   - Import the two fontsource packages here. Remove any Google Fonts CDN
-     reference; the design files must not be the source of a network font.
-   - Global :focus-visible: 2px solid var(--accent), 2px offset. Never outline:none.
-   - @media (prefers-reduced-motion: reduce) disabling transitions.
-
-5. Create src/i18n/utils.ts exporting:
-   - getLangFromUrl(url): 'fr' | 'en'
-   - useTranslations(lang): the dictionary for that language
-   - getAlternateUrl(pathname, lang): the same page in the other language
-   Create src/i18n/fr.ts and src/i18n/en.ts as empty typed objects for now, with
-   fr.ts as the type source (`export type Dict = typeof fr`).
-
-Deliverable: `npm run build` exits 0 and produces a valid empty site.
-Report: the build output, and the MATCH/DIFFERS table of token values.
-
-Create no pages, no components, no content in this phase.
-
-STOP and wait for my approval.
-```
-
----
-
-### PHASE 2 — Shell: layout, header, footer, language switch
-
-```
-Read BRIEF.md §3, §9, §10, and the header/footer as built in the design files.
-
-Build the shell, copying markup and CSS from the design files:
-
-- src/layouts/Layout.astro
-  Props: lang, title, description, path.
-  Renders <html lang>, every meta tag in BRIEF §9 (title, description, canonical,
-  hreflang fr / en / x-default, Open Graph, Twitter card), a skip-to-content link
-  as the first focusable element, <Header>, <main id="main">, <slot/>, <Footer>.
-  Imports global.css and both fontsource packages.
-
-- src/components/Header.astro
-  Exactly as in the design file. The language switch is a plain <a> to the
-  alternate URL, with hreflang and lang attributes and an accessible label.
-  Zero JavaScript.
-
-- src/components/Footer.astro
-  Exactly as in the design file. External links get target="_blank" rel="noopener".
-
-- src/components/Badge.astro
-  Props: status ('fonctionnel' | 'teste' | 'en-cours' | 'phase-2' | 'a-valider')
-  and label. Border + text carry the meaning; the fill is decoration only, so the
-  badge survives a black-and-white print.
-
-Create four thin pages that render Layout with a placeholder <h1>:
-  src/pages/index.astro          → lang 'fr'
-  src/pages/demonstration.astro  → lang 'fr'
-  src/pages/en/index.astro       → lang 'en'
-  src/pages/en/demo.astro        → lang 'en'
-
-Each page is only: pick lang, load dictionary, render Layout, render its body
-component (added in Phase 3/4). Keep them under 15 lines each.
-
-Verify and report:
-- / is French, /en/ is English
-- The switch on /demonstration lands on /en/demo, and back
-- hreflang on all four pages is reciprocal and correct
-- Tab order works and every stop shows a visible focus ring
-- Header and footer at 1440px and at 375px match the design files
-
-STOP and wait for my approval.
-```
-
----
-
-### PHASE 3 — Homepage, both languages, one template
-
-```
-Read BRIEF.md §4 and §5, and open both homepage design files (1440 and 375) plus
-both language versions.
-
-Build src/components/HomeBody.astro — ONE component, taking the dictionary `t` as
-a prop. It renders all twelve sections. Both /  and /en/ use it.
-
-How to build it:
-1. Copy the section markup from the DESKTOP FR design file. Keep its structure.
-2. Replace every literal string with a key. Fill src/i18n/fr.ts from the FR design
-   file and src/i18n/en.ts from the EN design file. Extract the copy — do not
-   retype it from BRIEF §5 and do not translate anything yourself. If a string
-   exists in FR but not in EN, stop and tell me rather than inventing it.
-3. Take the section CSS into a scoped <style> block inside HomeBody.astro. Shared
-   values come from global.css tokens.
-4. Add the mobile breakpoint from the 375px design file as media queries in that
-   same <style> block. Use the Phase 0 A3 diff as the specification. One template,
-   two breakpoints — never a second component.
-
-Hard constraints:
-- Zero client-side JavaScript. No scroll animation, no fade-in, no counters.
-- The status table and the hypotheses table are real <table> elements with
-  <caption>, <thead>, <th scope="col">. Below 700px they become stacked labelled
-  blocks. Horizontal scrolling inside a table is a FAIL.
-- Semantic markup: <section>, <h2>, <ul>, <table>. Not nested divs.
-- Every URL comes from BRIEF §8.1. If a link is not in that table, do not add it.
-
-Forbidden: adding, removing, reordering, or rewording any section; adding any
-number, percentage, user count, price, company name, testimonial, or logo that is
-not already in the design files.
-
-Report: the twelve sections rendered, any string present in one language but not
-the other, and any place the mobile design could not be expressed as a media query.
-
-STOP and wait for my approval.
-```
-
----
-
-### PHASE 4 — Demo page, both languages, and the media
-
-```
-Read BRIEF.md §7 and §8, and open both demo design files plus both languages.
-
-1. Move the assets out of website_design/images/ into the build (copy, do not
-   delete the originals):
-   - the video       → public/media/demo.mp4
-   - the poster      → public/media/demo-poster.jpg
-   - the OG image    → public/og-image.png
-   - the favicon     → public/favicon.svg
-   - every screenshot → src/assets/demo/, keeping the names used in BRIEF §8
-   If any file in BRIEF §8 is missing, fail loudly and list what is missing. Never
-   substitute a placeholder or an image from the internet.
-
-2. Build src/components/DemoBody.astro, same one-template-two-dictionaries pattern
-   as HomeBody.
-
-3. Video block, exactly:
-   <video src="/media/demo.mp4" poster="/media/demo-poster.jpg"
-          muted loop playsinline autoplay preload="metadata" controls>
-   Set aspect-ratio explicitly so there is no layout shift. Under
-   prefers-reduced-motion: reduce, drop autoplay and show the poster with controls.
-   The caption stating the video is sped up is mandatory — an unlabelled fast video
-   reads as fake.
-
-4. The verification block goes directly under the video, capped at the same 960px
-   width so the video, the box, and both captions share one left and one right edge.
-   Commit link: https://github.com/taras-svystun/taras-and-lisa/commit/5fec45d
-
-5. Seven screenshot rows, image left on every row (no alternating), image and text
-   vertically centred against each other, stacked on mobile.
-
-6. Desktop and mobile use DIFFERENT screenshot files (BRIEF §8). Serve them with
-   <picture>, not CSS:
-
-     <picture>
-       <source media="(max-width: 700px)" srcset={mobile.src} width={mobile.width} height={mobile.height}>
-       <img src={desktop.src} width={desktop.width} height={desktop.height} alt="..." loading="lazy" decoding="async">
-     </picture>
-
-   Hiding one with display:none is a FAIL — the browser downloads both.
-   Use getImage() from astro:assets to produce WebP for each source. First row is
-   loading="eager", the rest lazy. Every alt is a real French sentence describing
-   what the screenshot shows.
-
-Report: total page weight, number of requests, largest single asset, and confirm
-that at 375px no desktop screenshot is downloaded.
-
-STOP and wait for my approval.
-```
-
----
-
-### PHASE 5 — Responsive, accessibility, performance
-
-```
-Test at 320, 375, 414, 768, 1024, 1440, 1920. Report PASS/FAIL per item, with the
-fix applied where it failed.
-
-1.  No horizontal scrollbar at any width, on either page, in either language.
-2.  Rendered pages match the design files at 1440 and at 375. Report every visible
-    difference; do not silently "improve" one.
-3.  No text below 14px.
-4.  Tap targets ≥ 44×44px on mobile.
-5.  Both tables become stacked labelled blocks below 700px.
-6.  The video never overflows its container.
-7.  Contrast: compute the actual ratio for every text/background pair in use and
-    report the numbers. Fix anything under 4.5:1 (body) or 3:1 (large text).
-    Check --ink-muted on --surface-alt specifically.
-8.  Exactly one <h1> per page. No heading level skipped.
-9.  Every <img> has an alt attribute in the page's language.
-10. Skip-to-content link works from a cold keyboard focus.
-11. Full keyboard traversal of all four pages, visible focus ring at every stop.
-12. prefers-reduced-motion honoured.
-13. dist/ contains zero JavaScript bundles — or list and justify every byte.
-14. Report the total size of dist/ and the size of the largest file in it.
-
-STOP and wait for my approval.
-```
-
----
-
-### PHASE 6 — Final QA
-
-```
-Report a PASS/FAIL table:
-
-1.  npm run build exits 0 with no warnings.
-2.  Crawl dist/ — every internal link resolves to a real file.
-3.  Fetch every external link and report its HTTP status code.
-4.  No TODO, lorem, placeholder, or [[…]] marker anywhere in dist/.
-5.  Every page has a unique <title> and <meta description>.
-6.  sitemap.xml lists all four pages with correct alternates.
-7.  robots.txt exists and allows everything.
-8.  favicon and og-image resolve at their absolute URLs.
-9.  No console errors on any page under npm run preview.
-10. Grep every numeral in the built HTML and list them all in a table, with the
-    file and the surrounding sentence. I will confirm each one is real.
-11. Grep the built FR pages for English words and the EN pages for French words.
-    Report anything found.
-12. Confirm website_design/ still exists, unmodified, and is not in dist/.
-
-Items 10 and 11 are mandatory. Do not skip them.
-
-STOP and wait for my approval.
-```
-
----
-
-### PHASE 7 — Deployment configuration
-
-```
-1. Create wrangler.jsonc at the repo root:
-
-{
-  "name": "typetodeploy-site",
-  "compatibility_date": "2026-08-01",
-  "assets": {
-    "directory": "./dist",
-    "not_found_handling": "404-page"
-  }
-}
-
-No Cloudflare adapter, no Worker script — this is a static asset deployment.
-
-2. Create src/pages/404.astro (French, using Layout) with a link home.
-
-3. package.json scripts:
-     "deploy": "astro build && wrangler deploy"
-
-4. .gitignore: dist/, .astro/, node_modules/, .wrangler/
-   Do NOT gitignore website_design/ — it is the design record and must stay in git.
-
-5. README.md covering: run locally, build, deploy, where media lives, how to edit
-   the copy (src/i18n/), and the rule that website_design/ is the design reference
-   and is not part of the build.
-
-6. Verify: npx wrangler deploy --dry-run succeeds.
-
-Do NOT run a real deploy. I connect the repository through the Cloudflare
-dashboard myself.
-
-STOP.
-```
-
----
-
-## 12. Definition of done
-
-- [ ] French loads at `/` with no prefix; English at `/en/`
-- [ ] Language switch works on both pages, both directions
-- [ ] All content exists in both languages
-- [ ] Every number and claim on the site is real and verifiable
-- [ ] Video plays; poster shows before load; screenshots explain everything without the video
-- [ ] Link to a real GitHub commit created by the bot
-- [ ] Link to the live site edited by the agent
-- [ ] Responsive 320 → 1920, no horizontal scroll
-- [ ] Zero broken links
-- [ ] Images served as WebP, `dist/` under 5 MB
-- [ ] One `<h1>` per page, all images have alt, contrast passes, keyboard-navigable
-- [ ] Unique title + description per page, hreflang correct, sitemap present
-- [ ] OG image renders in a link preview
-- [ ] `npm run build` clean
-- [ ] Deployed, HTTPS active, custom domain resolving
-- [ ] Tested on a real phone and a real laptop
-- [ ] Someone who has never heard of the project understands it in 60 seconds
-- [ ] Lisa can read every sentence on the site aloud in French and explain it unprompted
-- [ ] The PDF one-pager exports cleanly and is legible printed in black and white
-- [ ] Eligibility confirmed with the PeeL office
-
----
-
 ## 13. PDF one-pager (jury handout)
 
 Juries print things and pass them around. One A4 page, produced from the same design.
@@ -1005,22 +530,355 @@ The Statut National Étudiant-Entrepreneur and the PeeL programmes are open to s
 
 ---
 
+## 9. SEO / metadata requirements
+
+Per page:
+- `<title>` — FR home: `TypeToDeploy — mettre à jour son site web en envoyant un message`
+- `<meta name="description">` — 150–160 characters, distinct per page and per language
+- `<html lang="fr">` / `<html lang="en">`
+- `<link rel="alternate" hreflang="fr" href="…">`, `hreflang="en"`, `hreflang="x-default"` → FR
+- `<link rel="canonical">`
+- Open Graph: `og:title`, `og:description`, `og:image` (absolute URL), `og:url`, `og:type=website`, `og:locale` (`fr_FR` / `en_US`)
+- Twitter: `twitter:card=summary_large_image`
+- `@astrojs/sitemap` with i18n config
+- `robots.txt` allowing everything
+
 ---
 
-## 16. Email — `contact@taras-and-lisa.com`
+## 10. Accessibility requirements (non-negotiable)
 
-Receiving is set up with Cloudflare Email Routing on the `taras-and-lisa.com` zone. It is a forwarder, not a mailbox: mail sent to `contact@taras-and-lisa.com` is delivered to an existing personal inbox. Sending *from* that address is a separate, optional step.
-
-**For Claude Code:** the address is content, not infrastructure. Put it in `src/i18n/*.ts` as a `mailto:` link in the contact section and the footer. Do not add a contact form, do not add an email API, do not add a Worker route for mail. If the address in the design files differs from `contact@taras-and-lisa.com`, stop and ask before changing it.
-
-The dashboard steps are in the founder's instructions, not here.
+- Contrast ≥ 4.5:1 for body text, ≥ 3:1 for large text. Verify `--ink-muted` on `--surface-alt`.
+- One `<h1>` per page. No heading level skipped.
+- All images have meaningful `alt` in the page language. Decorative images `alt=""`.
+- Video: `controls` present; a text summary of the video exists on the page (the screenshot section serves this).
+- Every link and button reachable by keyboard, with a visible focus ring.
+- Skip-to-content link as the first focusable element.
+- Language switch link has an explicit accessible label (`hreflang` + `lang` attributes).
+- `prefers-reduced-motion` respected.
 
 ---
 
-## 17. Definition of done — additions after the design handoff
+## 11. Claude Code — phased implementation plan
 
-- [ ] Rendered pages match `website_design/` at 1440px and at 375px; every deviation is listed and accepted
-- [ ] `website_design/` is still present in git, unmodified, and absent from `dist/`
-- [ ] No Google Fonts or other CDN request in the built HTML
-- [ ] At 375px the browser downloads only the mobile screenshots
-- [ ] `contact@taras-and-lisa.com` receives a real test message
+> Copy each phase as a separate message. **Do not** paste more than one phase at a time.
+> Every phase ends with a mandatory STOP. Do not let Claude Code chain phases.
+
+---
+
+### PHASE 0 — Inspect. Change nothing.
+
+```
+Read BRIEF.md at the repo root in full before doing anything.
+
+You are in READ-ONLY mode for this phase. Do not create, edit, or delete any file.
+
+Task: inspect the existing production repository `taras-svystun/taras-and-lisa`
+(clone it into a temporary directory OUTSIDE this repo, or read it from the local
+path I give you). Report the following:
+
+1. Astro version, Node version, package manager (npm/pnpm/yarn).
+2. Whether Tailwind or any CSS framework is used, and how it is configured.
+3. Whether TypeScript is used, and the tsconfig strictness.
+4. The exact structure of src/ (pages, layouts, components, content collections).
+5. Any existing i18n setup.
+6. How the site is currently deployed to Cloudflare (Pages or Workers, adapter,
+   wrangler config file, build command, output directory).
+7. Any reusable component I could copy into the new site (button, layout, section
+   wrapper). List them by file path with a one-line description.
+8. Any file that must NOT be touched because the Telegram bot writes to it.
+
+Output a single markdown report. Do not propose an implementation yet.
+Do not modify the inspected repository in any way.
+
+STOP after the report and wait for my approval.
+```
+
+---
+
+### PHASE 1 — Scaffold + design system
+
+```
+Read BRIEF.md again.
+
+Create a new Astro project in THIS repository (currently empty).
+
+Requirements:
+- `npm create astro@latest . -- --template minimal --typescript strict --no-install --no-git`
+  then install dependencies with npm.
+- Astro 5.x, `output: 'static'`. Do NOT install any Cloudflare adapter — this is a
+  fully static site with no server routes.
+- Install: `@astrojs/sitemap`, `@fontsource-variable/inter`,
+  `@fontsource-variable/source-serif-4`. Nothing else.
+- No Tailwind, no UI framework, no icon library, no animation library.
+
+Configure `astro.config.mjs`:
+- `site: 'https://typetodeploy.taras-and-lisa.com'` (I will confirm the final domain
+  in Phase 8 — use this value for now and make it a single easily-changed constant)
+- `i18n: { defaultLocale: 'fr', locales: ['fr', 'en'], routing: { prefixDefaultLocale: false } }`
+- sitemap integration with matching i18n config
+
+Create `src/styles/global.css` containing EXACTLY the token block from BRIEF.md
+section 2.2, plus:
+- a modern CSS reset
+- base element styles (body, headings, p, a, ul, table) using the tokens
+- utility classes: `.page` (max-width + horizontal padding), `.prose` (max-width
+  --width-text), `.section` (vertical rhythm), `.section--alt` (alt background)
+- `.badge` with modifier classes for the five status values
+- visible `:focus-visible` styles globally
+- `@media (prefers-reduced-motion: reduce)` block disabling transitions
+
+Create `src/i18n/fr.ts` and `src/i18n/en.ts` as typed objects, and
+`src/i18n/utils.ts` exporting:
+- `useTranslations(lang)` returning the dictionary
+- `getLangFromUrl(url)` returning 'fr' | 'en'
+- `getAlternateUrl(url, lang)` returning the equivalent page in the other language
+
+Leave the dictionaries with placeholder keys only for now — I will supply copy in
+Phase 3.
+
+Deliverable: `npm run build` succeeds and produces an empty-but-valid site.
+Run it and show me the output.
+
+Do NOT create any page content yet.
+
+STOP and wait for my approval.
+```
+
+---
+
+### PHASE 2 — Layout, header, footer, language switch
+
+```
+Read BRIEF.md sections 3 and 10.
+
+Create:
+- `src/layouts/BaseLayout.astro` — takes props: `lang`, `title`, `description`,
+  `alternateUrl`. Renders <html lang>, all metadata from BRIEF.md section 9,
+  skip-to-content link, <Header/>, <slot/>, <Footer/>.
+- `src/components/Header.astro` — project name (links to home in current lang),
+  a "Démonstration"/"Demo" link, and a language switch that is a plain <a> to
+  `alternateUrl` with `hreflang` and `lang` attributes. No JavaScript.
+- `src/components/Footer.astro` — contact email, GitHub link, live site link,
+  copyright, language switch repeated. Links open external URLs in a new tab with
+  `rel="noopener"`.
+- `src/components/Section.astro` — wrapper accepting `alt` (boolean) and `id`.
+- `src/components/Badge.astro` — accepts `status` prop, one of:
+  'fonctionnel' | 'teste' | 'en-cours' | 'phase-2' | 'a-valider'.
+
+Create four empty pages that render the layout with placeholder <h1>:
+`src/pages/index.astro`, `src/pages/demonstration.astro`,
+`src/pages/en/index.astro`, `src/pages/en/demo.astro`.
+
+Verify with `npm run build` and `npm run preview`:
+- `/` renders French, `/en/` renders English
+- The language switch on `/demonstration` goes to `/en/demo` and back correctly
+- Keyboard Tab order works and every focused element shows a visible ring
+
+Show me a screenshot of the header and footer at 1440px and at 375px width.
+
+STOP and wait for my approval.
+```
+
+---
+
+### PHASE 3 — Homepage sections + French copy
+
+```
+Read BRIEF.md sections 4 and 5 in full.
+
+Fill `src/i18n/fr.ts` with the exact French copy from BRIEF.md section 5.
+Do not paraphrase it. Do not "improve" it. Do not add sentences.
+If a value is missing or marked TBD, use a clearly visible placeholder like
+`[[À FOURNIR : …]]` and list every placeholder in your final report.
+
+Build the twelve homepage sections listed in BRIEF.md section 4, as separate
+components under `src/components/sections/`. One file per section.
+
+Hard constraints:
+- Zero client-side JavaScript.
+- No animation on scroll, no fade-in, no counters.
+- The 4-step solution block is a CSS grid, 4 columns ≥ 900px, 1 column below.
+- The status table and the hypotheses table are real <table> elements with
+  <caption>, <thead>, <th scope="col">. On mobile they become stacked definition
+  blocks — do NOT allow horizontal scrolling.
+- Every external link is verified to exist before being added. If I have not given
+  you a URL, leave `[[URL À FOURNIR]]` rather than inventing one.
+
+Explicitly forbidden: adding any number, percentage, user count, revenue figure,
+company name, testimonial, or partner logo that is not written in BRIEF.md.
+
+Deliverable: `/` renders fully in French. Report every placeholder still present.
+
+STOP and wait for my approval.
+```
+
+---
+
+### PHASE 4 — Demo page + media
+
+```
+Read BRIEF.md section 7 and 8.
+
+Assume the following files now exist (fail loudly with a clear error if any is
+missing — do NOT substitute a placeholder image from the internet):
+  public/media/demo.mp4
+  public/media/demo-poster.jpg
+  src/assets/demo/*.png
+
+Build `/demonstration` per BRIEF.md section 7.
+
+Requirements:
+- The <video> element uses the exact attribute set from BRIEF.md. Set explicit
+  width/height or aspect-ratio to prevent cumulative layout shift.
+- Under `@media (prefers-reduced-motion: reduce)`, remove autoplay behaviour.
+- The verification block is placed directly under the video, before the
+  screenshots. Style it with `--accent-soft` background and a 1px `--accent` border.
+- Screenshots use `<Image />` from `astro:assets`, `format="webp"`, `quality={82}`,
+  `loading="lazy"` for all but the first, with explicit `alt` in French describing
+  what the screenshot shows.
+- Each screenshot row has the four labelled blocks: Demande / Action de l'agent /
+  Résultat / Pourquoi c'est important.
+
+Report: the total page weight, the number of network requests, and the size of
+the largest asset.
+
+STOP and wait for my approval.
+```
+
+---
+
+### PHASE 5 — English mirror
+
+```
+Read BRIEF.md section 6.
+
+Fill `src/i18n/en.ts` and build `/en/` and `/en/demo` reusing the exact same
+components. No new components. No divergent layout.
+
+The English is a mirror, not a new site. Every section present in French must be
+present in English.
+
+Verify:
+- No French string leaks into the English pages, and vice versa. Grep both built
+  HTML files for the other language's distinctive words and report the result.
+- hreflang tags are correct and reciprocal on all four pages.
+- `<html lang>` is correct on all four pages.
+
+STOP and wait for my approval.
+```
+
+---
+
+### PHASE 6 — Responsive, accessibility, performance
+
+```
+Test and fix at these widths: 320, 375, 768, 1024, 1440, 1920.
+
+Checklist — report PASS/FAIL for each item, with the fix applied:
+1. No horizontal scrollbar at any width.
+2. No text smaller than 14px anywhere.
+3. Tap targets ≥ 44×44px on mobile.
+4. Tables reflow to stacked blocks below 700px.
+5. The video block never overflows its container.
+6. Contrast ratios: run an automated check on every text/background pair used and
+   report actual ratios. Fix anything below 4.5:1 (body) or 3:1 (large text).
+7. Exactly one <h1> per page; no heading level skipped.
+8. Every <img> has an alt attribute.
+9. Skip-to-content link works.
+10. Full keyboard traversal of both pages with a visible focus ring at every stop.
+11. `prefers-reduced-motion` honoured.
+
+Then:
+- Confirm `dist/` contains zero JavaScript bundles, or list and justify any that exist.
+- Report the total size of `dist/`.
+- Generate `public/og-image.png` requirements as a spec for me (do not generate the
+  image yourself) if I have not supplied one.
+
+STOP and wait for my approval.
+```
+
+---
+
+### PHASE 7 — Final QA before deployment
+
+```
+Run the full checklist and report a table of PASS/FAIL:
+
+1. `npm run build` exits 0 with no warnings.
+2. Every internal link resolves to a real page (crawl `dist/` and verify).
+3. Every external link returns HTTP 200 (fetch each one and report status codes).
+4. No `[[À FOURNIR]]`, `TODO`, `lorem`, or placeholder text remains anywhere in `dist/`.
+5. Every page has a unique <title> and <meta description>.
+6. sitemap.xml exists and lists all four pages with correct alternates.
+7. robots.txt exists.
+8. favicon and og-image resolve.
+9. No console errors on any page in `npm run preview`.
+10. Grep `dist/` for any invented number or metric — list every numeral found in
+    the built HTML and let me confirm each one is real.
+
+Item 10 is mandatory. Do not skip it.
+
+STOP and wait for my approval.
+```
+
+---
+
+### PHASE 8 — Deployment configuration
+
+```
+Create `wrangler.jsonc` at the repo root:
+
+{
+  "name": "typetodeploy-site",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
+
+Do NOT install the Cloudflare adapter. This is a static asset deployment; no
+Worker script is needed.
+
+Create `src/pages/404.astro` (French) with a link back to the homepage.
+
+Add to package.json scripts:
+  "deploy": "astro build && wrangler deploy"
+
+Add `.gitignore` entries for `dist/`, `.astro/`, `node_modules/`, `.wrangler/`.
+
+Create a README.md documenting: how to run locally, how to build, how to deploy,
+where the media assets live, and how to edit the copy (pointing at src/i18n/).
+
+Verify `npx wrangler deploy --dry-run` succeeds.
+
+Do NOT run an actual deploy. I will connect the repository through the Cloudflare
+dashboard myself.
+
+STOP.
+```
+
+---
+
+## 12. Definition of done
+
+- [ ] French loads at `/` with no prefix; English at `/en/`
+- [ ] Language switch works on both pages, both directions
+- [ ] All content exists in both languages
+- [ ] Every number and claim on the site is real and verifiable
+- [ ] Video plays; poster shows before load; screenshots explain everything without the video
+- [ ] Link to a real GitHub commit created by the bot
+- [ ] Link to the live site edited by the agent
+- [ ] Responsive 320 → 1920, no horizontal scroll
+- [ ] Zero broken links
+- [ ] Images served as WebP, `dist/` under 5 MB
+- [ ] One `<h1>` per page, all images have alt, contrast passes, keyboard-navigable
+- [ ] Unique title + description per page, hreflang correct, sitemap present
+- [ ] OG image renders in a link preview
+- [ ] `npm run build` clean
+- [ ] Deployed, HTTPS active, custom domain resolving
+- [ ] Tested on a real phone and a real laptop
+- [ ] Someone who has never heard of the project understands it in 60 seconds
+- [ ] Lisa can read every sentence on the site aloud in French and explain it unprompted
+- [ ] The PDF one-pager exports cleanly and is legible printed in black and white
+- [ ] Eligibility confirmed with the PeeL office
