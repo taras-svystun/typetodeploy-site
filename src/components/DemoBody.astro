@@ -87,7 +87,7 @@ for (const key of Object.keys(rawSources) as ImageKey[]) {
 				d.steps.rows.map((row, i) => {
 					const img = images[row.image as ImageKey];
 					return (
-						<li class="step-row">
+						<li class:list={['step-row', i % 2 === 1 && 'step-row--reverse']}>
 							<div class="step-heading">
 								<div class="step-num">{row.num}</div>
 								<h3>{row.title}</h3>
@@ -326,6 +326,10 @@ for (const key of Object.keys(rawSources) as ImageKey[]) {
 	.step-row:first-child {
 		margin-top: 56px;
 		border-top-color: var(--border-strong);
+	}
+
+	.step-row--reverse {
+		grid-template-areas: 'heading media' 'fields media';
 	}
 
 	.step-heading {
